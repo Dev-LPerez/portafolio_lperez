@@ -58,6 +58,24 @@ export const projects: Project[] = [
       // "/projects/nexlocal-2.png",
     ],
     featured: true,
+  }, {
+    slug: "Menu digital - POS Integrado",
+    title: "Menu digital - POS Integrado",
+    category: "Web App",
+    year: 2025,
+    summary:
+      "Aplicación web progresiva y moderna para la comercialización de productos del emprendimiento",
+    description:
+      "Diseñé e implementé una arquitectura desacoplada aplicando principios de programación modular en el backend con PHP. Estructuré una base de datos relacional MySQL optimizada con tablas de seguimiento y auditoría nativa de registros. Para la capa de seguridad, implementé un middleware personalizado de autenticación con tokens JWT para la protección de endpoints críticos. El frontend fue desarrollado como una SPA reactiva con Vue 3, TypeScript y Tailwind CSS, integrando componentes dinámicos de carga inteligente y paneles de analítica.",
+    tags: ["React", "Vite", "Firebase", "TypeScript", "Tailwind CSS", "Mobile-First", "PWA"],
+    links: [],
+    liveUrl: "https://gomifire.netlify.app/",
+    githubUrl: "https://github.com/Dev-LPerez/gomifire-menuapp",
+    screenshots: [
+      // "/projects/gomifire-1.png",
+      // "/projects/gomifire-2.png",
+    ],
+    featured: true,
   },
 ];
 
