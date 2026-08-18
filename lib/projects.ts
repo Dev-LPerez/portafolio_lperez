@@ -59,15 +59,15 @@ export const projects: Project[] = [
     ],
     featured: true,
   }, {
-    slug: "Menu digital - POS Integrado",
-    title: "Menu digital - POS Integrado",
-    category: "Web App",
+    slug: "menu-digital-pos-integrado",
+    title: "GomiFire — Menú Digital & POS Integrado",
+    category: "E-Commerce / PWA",
     year: 2025,
     summary:
-      "Aplicación web progresiva y moderna para la comercialización de productos del emprendimiento",
+      "Progressive Web App (PWA) de comercio electrónico con catálogo reactivo, checkout con geolocalización GPS vía WhatsApp y panel administrativo POS con sincronización en tiempo real en Firebase.",
     description:
-      "Diseñé e implementé una arquitectura desacoplada aplicando principios de programación modular en el backend con PHP. Estructuré una base de datos relacional MySQL optimizada con tablas de seguimiento y auditoría nativa de registros. Para la capa de seguridad, implementé un middleware personalizado de autenticación con tokens JWT para la protección de endpoints críticos. El frontend fue desarrollado como una SPA reactiva con Vue 3, TypeScript y Tailwind CSS, integrando componentes dinámicos de carga inteligente y paneles de analítica.",
-    tags: ["React", "Vite", "Firebase", "TypeScript", "Tailwind CSS", "Mobile-First", "PWA"],
+      "Desarrollé y modernicé una Progressive Web App (PWA) de alto rendimiento construida con React 19, TypeScript, Vite 6 y Tailwind CSS v4, conectada a Firebase Firestore (NoSQL en tiempo real) y Firebase Storage. Implementé una experiencia de usuario fluida y reactiva con layout adaptativo (PC/Movil), navegación por categorías con smooth scroll y checkout automatizado con geolocalización GPS hacia la API de WhatsApp. En el apartado administrativo, diseñé un panel POS secreto con control de sesiones, deducción automática de inventario por pedido, compresión en cliente de imágenes a WebP (~25 KB) para carga instantánea, y un módulo financiero con métricas de ventas, ticket promedio, margen neto y desglose de cajas independientes.",
+    tags: ["React 19", "TypeScript", "Vite", "Tailwind CSS v4", "Firebase Firestore", "NoSQL", "PWA", "POS"],
     links: [],
     liveUrl: "https://gomifire.netlify.app/",
     githubUrl: "https://github.com/Dev-LPerez/gomifire-menuapp",
@@ -80,7 +80,13 @@ export const projects: Project[] = [
 ];
 
 export function getProject(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+  const decoded = decodeURIComponent(slug).toLowerCase().trim();
+  return projects.find(
+    (p) =>
+      p.slug === slug ||
+      p.slug.toLowerCase() === decoded ||
+      decodeURIComponent(p.slug).toLowerCase() === decoded
+  );
 }
 
 export function getFeaturedProjects(): Project[] {
