@@ -1,69 +1,153 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { profile } from "@/lib/profile";
+import { getFeaturedProjects } from "@/lib/projects";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
+  description:
+    "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano especializado en React, Next.js y Node.js.",
+  openGraph: {
+    title: "Luis Guillermo Pérez Rubio — Portafolio",
+    description:
+      "Ingeniero de Sistemas & Desarrollador de Software desde Colombia. Ver proyectos y experiencia.",
+  },
+};
+
+export default function HomePage() {
+  const featured = getFeaturedProjects();
+  const { stats } = profile;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* ── HERO ────────────────────────────────────── */}
+      <section className="hero rule-bottom">
+        <div className="container">
+          {/* Top row: status */}
+          <div className="hero-top">
+            <span className="hero-status">
+              <span className="hero-status-dot" aria-hidden="true" />
+              Disponible para proyectos
+            </span>
+          </div>
+
+          {/* Nombre y Foto alineados proporcionalmente */}
+          <div className="hero-title-row">
+            <h1 className="display hero-title">
+              Luis Guillermo
+              <br />
+              Pérez Rubio
+            </h1>
+
+            <div className="hero-photo-frame" aria-label={profile.name}>
+              {profile.avatar ? (
+                <img
+                  src={profile.avatar}
+                  alt={profile.name}
+                  className="hero-photo-img"
+                  loading="eager"
+                />
+              ) : (
+                <span className="hero-photo-initials">{profile.initials}</span>
+              )}
+            </div>
+          </div>
+
+          {/* Intro */}
+          <p className="hero-intro">
+            Ingeniero de Sistemas y Desarrollador Full-Stack apasionado por el Backend, la arquitectura modular y la programación tipada (TypeScript, NestJS, Java). Construyo APIs robustas, monolitos bien estructurados y soluciones con bases de datos relacionales como PostgreSQL.
           </p>
+
+          {/* CTAs */}
+          <div className="hero-ctas">
+            <Link href="/proyectos" className="btn btn--solid" id="hero-cta-projects">
+              Ver proyectos
+            </Link>
+            <a
+              href={`mailto:${profile.email}`}
+              className="btn btn--outline"
+              id="hero-cta-contact"
+            >
+              Trabajemos juntos
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* ── STATS ───────────────────────────────────── */}
+      <section className="stats-strip rule-bottom" aria-label="Estadísticas">
+        <div className="container">
+          <div className="stats-grid">
+            <div className="stat-item">
+              <p className="stat-number display">{stats.years}+</p>
+              <p className="stat-label">Años de experiencias</p>
+            </div>
+            <div className="stat-item">
+              <p className="stat-number display">{stats.projects}+</p>
+              <p className="stat-label">Proyectos construidos</p>
+            </div>
+            <div className="stat-item">
+              <p className="stat-number display">{stats.technologies}+</p>
+              <p className="stat-label">Tecnologías dominadas</p>
+            </div>
+            <div className="stat-item">
+              <p className="stat-number display">{stats.coffees}+</p>
+              <p className="stat-label">Cafés tomados</p>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ── PROYECTOS DESTACADOS ─────────────────────── */}
+      <section className="projects-teaser rule-bottom">
+        <div className="container">
+          <div className="projects-teaser-header">
+            <h2 className="display projects-teaser-title">Proyectos destacados</h2>
+            <Link href="/proyectos" className="projects-teaser-link">
+              Ver todos →
+            </Link>
+          </div>
+
+          <div className="projects-grid">
+            {featured.map((project) => (
+              <Link
+                key={project.slug}
+                href={`/proyectos/${project.slug}`}
+                className="project-card"
+                style={{ textDecoration: "none" }}
+              >
+                <div className="project-card-meta">
+                  <span className="project-card-year">{project.year}</span>
+                  <span className="project-card-category">— {project.category}</span>
+                </div>
+                <h3 className="project-card-title">{project.title}</h3>
+                <p className="project-card-summary">{project.summary}</p>
+                <div className="project-card-tags">
+                  {project.tags.slice(0, 3).map((tag) => (
+                    <span key={tag} className="tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TEASER SOBRE MÍ ─────────────────────────── */}
+      <section className="about-teaser">
+        <div className="container about-teaser-inner">
+          <p className="about-teaser-phrase">
+            Backend sólido, tipado estricto
+            <br />
+            y arquitectura modular.
+          </p>
+          <Link href="/sobre-mi" className="about-teaser-link">
+            Conocer más sobre mí →
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
