@@ -51,8 +51,8 @@ export const projects: Project[] = [
       "Arquitecté un monolito web escalable utilizando Laravel 12 y PHP, fundamentado en una rigurosa Programación Orientada a Objetos (POO) y respaldado por una base de datos relacional PostgreSQL. Diseñé un sistema basado en una Máquina de Estados Finitos para controlar con precisión el ciclo de vida de las reservas, gestionando concurrencia de cupos y cálculo automático de tarifas. Gestioné el control de versiones con Git colaborativo y apoyé el análisis y maquetación con uso estratégico de herramientas de IA para validación de lógica antes de producción.",
     tags: ["Laravel 12", "PHP", "PostgreSQL", "Monolito", "POO", "Git"],
     links: [],
-    liveUrl: "https://nexlocal.up.railway.app/", // 👈 Coloca aquí el link de tu proyecto
-    githubUrl: "https://github.com/Dev-LPerez/Nexlocal", // 👈 Coloca aquí el link de GitHub
+    liveUrl: "https://nexlocal.onrender.com/",
+    githubUrl: "https://github.com/Dev-LPerez/Nexlocal",
     screenshots: [
       // "/projects/nexlocal-1.png",
       // "/projects/nexlocal-2.png",
