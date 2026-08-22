@@ -92,7 +92,7 @@ export default function HomePage() {
             </div>
             <div className="stat-item">
               <p className="stat-number display">{stats.coffees}+</p>
-              <p className="stat-label">Cafés tomados</p>
+              <p className="stat-label">Tintos tomados</p>
             </div>
           </div>
         </div>
@@ -139,9 +139,9 @@ export default function HomePage() {
       <section className="about-teaser">
         <div className="container about-teaser-inner">
           <p className="about-teaser-phrase">
-            Backend sólido, tipado estricto
+            Ingeniero de Sistemas Y Desarrollador Full-Stack,
             <br />
-            y arquitectura modular.
+            Diseñando soluciones robustas.
           </p>
           <Link href="/sobre-mi" className="about-teaser-link">
             Conocer más sobre mí →

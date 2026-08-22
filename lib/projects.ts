@@ -25,7 +25,7 @@ export const projects: Project[] = [
       "Plataforma de logística con backend modular en PHP, base de datos MySQL y frontend SPA en Vue 3 con TypeScript.",
     description:
       "Diseñé e implementé una arquitectura desacoplada aplicando principios de programación modular en el backend con PHP. Estructuré una base de datos relacional MySQL optimizada con tablas de seguimiento y auditoría nativa de registros. Para la capa de seguridad, implementé un middleware personalizado de autenticación con tokens JWT para la protección de endpoints críticos. El frontend fue desarrollado como una SPA reactiva con Vue 3, TypeScript y Tailwind CSS, integrando componentes dinámicos de carga inteligente y paneles de analítica.",
-    tags: ["PHP", "Prog. Modular", "MySQL", "Vue.js 3", "TypeScript", "JWT", "Tailwind CSS"],
+    tags: ["PHP", "MySQL", "Vue.js 3", "TypeScript", "JWT", "Tailwind CSS"],
     links: [],
     liveUrl: "https://sistema-refugio.lgperez.dev",
     githubFrontendUrl: "https://github.com/Dev-LPerez/SistemaRefugios_Frontend",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
       "Desarrollé y modernicé una Progressive Web App (PWA) de alto rendimiento construida con React 19, TypeScript, Vite 6 y Tailwind CSS v4, conectada a Firebase Firestore (NoSQL en tiempo real) y Firebase Storage. Implementé una experiencia de usuario fluida y reactiva con layout adaptativo (PC/Movil), navegación por categorías con smooth scroll y checkout automatizado con geolocalización GPS hacia la API de WhatsApp. En el apartado administrativo, diseñé un panel POS secreto con control de sesiones, deducción automática de inventario por pedido, compresión en cliente de imágenes a WebP (~25 KB) para carga instantánea, y un módulo financiero con métricas de ventas, ticket promedio, margen neto y desglose de cajas independientes.",
     tags: ["React 19", "TypeScript", "Vite", "Tailwind CSS v4", "Firebase Firestore", "NoSQL", "PWA", "POS"],
     links: [],
-    liveUrl: "https://gomifire.lgperez.dev",
+    liveUrl: "https://gomifire.netlify.app",
     githubUrl: "https://github.com/Dev-LPerez/gomifire-menuapp",
     screenshots: [
       // "/projects/gomifire-1.png",
