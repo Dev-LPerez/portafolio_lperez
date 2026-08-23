@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Image from "next/image";
 
 type ProjectCarouselProps = {
   title: string;
@@ -330,12 +331,16 @@ export default function ProjectCarousel({
               }
             }}
           >
-            <img
+            <Image
               key={currentIndex}
               src={screenshots[currentIndex]}
               alt={`Captura ${currentIndex + 1} de ${title}`}
+              width={1200}
+              height={750}
               className="carousel-main-image"
-              loading="eager"
+              priority={currentIndex === 0}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
+              style={{ width: "100%", height: "auto" }}
             />
 
             {/* Swipe indicator badge para móvil */}
@@ -418,7 +423,14 @@ export default function ProjectCarousel({
                 role="tab"
                 aria-selected={idx === currentIndex}
               >
-                <img src={shot} alt={`Miniatura ${idx + 1}`} loading="lazy" />
+                <Image
+                  src={shot}
+                  alt={`Miniatura ${idx + 1}`}
+                  width={160}
+                  height={100}
+                  sizes="80px"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </button>
             ))}
           </div>
@@ -531,15 +543,23 @@ export default function ProjectCarousel({
                     : "Doble clic o pellizca para hacer zoom"
                 }
               >
-                <img
+                <Image
                   key={currentIndex}
                   src={screenshots[currentIndex]}
                   alt={`Captura ${currentIndex + 1} de ${title}`}
+                  width={1600}
+                  height={1000}
                   className="project-modal-image"
+                  sizes="100vw"
                   style={{
                     transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
                     cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
                     transition: isDragging ? "none" : "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                    maxWidth: "100%",
+                    maxHeight: "80vh",
+                    width: "auto",
+                    height: "auto",
+                    objectFit: "contain",
                   }}
                   draggable={false}
                 />
@@ -574,7 +594,14 @@ export default function ProjectCarousel({
                       }}
                       aria-label={`Ver foto ${idx + 1}`}
                     >
-                      <img src={shot} alt={`Miniatura modal ${idx + 1}`} />
+                      <Image
+                        src={shot}
+                        alt={`Miniatura modal ${idx + 1}`}
+                        width={120}
+                        height={80}
+                        sizes="60px"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
                     </button>
                   ))}
                 </div>

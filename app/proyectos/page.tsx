@@ -6,9 +6,13 @@ export const metadata: Metadata = {
   title: "Proyectos",
   description:
     "Trabajo seleccionado de Luis Guillermo Pérez Rubio. Proyectos de desarrollo web, aplicaciones y más.",
+  alternates: {
+    canonical: "/proyectos",
+  },
   openGraph: {
     title: "Proyectos — Luis Guillermo Pérez Rubio",
     description: "Trabajo seleccionado: aplicaciones web, SaaS, APIs y más.",
+    url: "https://lgperez.dev/proyectos",
   },
 };
 

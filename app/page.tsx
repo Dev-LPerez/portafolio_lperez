@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { profile } from "@/lib/profile";
 import { getFeaturedProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
   description:
-    "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano especializado en React, Next.js y Node.js.",
+    "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano especializado en React, Next.js, Node.js y PostgreSQL.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Luis Guillermo Pérez Rubio — Portafolio",
     description:
       "Ingeniero de Sistemas & Desarrollador de Software desde Colombia. Ver proyectos y experiencia.",
+    url: "https://lgperez.dev",
   },
 };
 
@@ -41,11 +46,14 @@ export default function HomePage() {
 
             <div className="hero-photo-frame" aria-label={profile.name}>
               {profile.avatar ? (
-                <img
+                <Image
                   src={profile.avatar}
                   alt={profile.name}
+                  width={112}
+                  height={112}
                   className="hero-photo-img"
-                  loading="eager"
+                  priority
+                  sizes="(max-width: 640px) 80px, 112px"
                 />
               ) : (
                 <span className="hero-photo-initials">{profile.initials}</span>

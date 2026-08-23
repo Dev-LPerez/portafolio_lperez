@@ -18,8 +18,18 @@ export async function generateMetadata(
   return {
     title: project.title,
     description: project.summary,
+    alternates: {
+      canonical: `/proyectos/${project.slug}`,
+    },
     openGraph: {
-      title: `${project.title} — Luis G. Pérez Rubio`,
+      title: `${project.title} — Luis Guillermo Pérez Rubio`,
+      description: project.summary,
+      url: `https://lgperez.dev/proyectos/${project.slug}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Luis Guillermo Pérez Rubio`,
       description: project.summary,
     },
   };
@@ -37,8 +47,74 @@ export default async function ProjectDetailPage(
 
   const related = getRelatedProjects(slug, 2);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: "https://lgperez.dev",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Proyectos",
+        item: "https://lgperez.dev/proyectos",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: project.title,
+        item: `https://lgperez.dev/proyectos/${project.slug}`,
+      },
+    ],
+  };
+
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: project.title,
+    headline: project.title,
+    description: project.description,
+    programmingLanguage: project.tags,
+    author: {
+      "@type": "Person",
+      name: "Luis Guillermo Pérez Rubio",
+      url: "https://lgperez.dev",
+    },
+    url: `https://lgperez.dev/proyectos/${project.slug}`,
+    ...(project.githubUrl || project.githubFrontendUrl || project.githubBackendUrl
+      ? {
+          codeRepository:
+            project.githubUrl ||
+            project.githubFrontendUrl ||
+            project.githubBackendUrl,
+        }
+      : {}),
+    ...(project.liveUrl
+      ? {
+          targetProduct: {
+            "@type": "WebApplication",
+            name: project.title,
+            url: project.liveUrl,
+          },
+        }
+      : {}),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumbJsonLd, projectJsonLd]).replace(
+            /</g,
+            "\\u003c"
+          ),
+        }}
+      />
       {/* ── CABECERA ─────────────────────────────────── */}
       <section className="project-detail-header">
         <div className="container">

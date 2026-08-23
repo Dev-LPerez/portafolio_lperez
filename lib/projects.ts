@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   category: string;
   year: number;
+  updatedAt?: string; // Fecha de última actualización (YYYY-MM-DD)
   summary: string;
   description: string;
   tags: string[];
@@ -21,6 +22,7 @@ export const projects: Project[] = [
     title: "Sistema de Gestión de Refugios",
     category: "Web App",
     year: 2026,
+    updatedAt: "2026-03-01",
     summary:
       "Plataforma de logística con backend modular en PHP, base de datos MySQL y frontend SPA en Vue 3 con TypeScript.",
     description:
@@ -45,6 +47,7 @@ export const projects: Project[] = [
     title: "NexLocal",
     category: "Marketplace",
     year: 2026,
+    updatedAt: "2026-02-15",
     summary:
       "Plataforma monolítica de turismo experiencial construida con Laravel 12 (PHP) y PostgreSQL, con sistema de reservas mediante Máquina de Estados Finitos.",
     description:
@@ -63,6 +66,7 @@ export const projects: Project[] = [
     title: "GomiFire — Menú Digital & POS Integrado",
     category: "E-Commerce / PWA",
     year: 2025,
+    updatedAt: "2025-11-20",
     summary:
       "Progressive Web App (PWA) de comercio electrónico con catálogo reactivo, checkout con geolocalización GPS vía WhatsApp y panel administrativo POS con sincronización en tiempo real en Firebase.",
     description:

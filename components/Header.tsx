@@ -31,11 +31,13 @@ function LinkedInIcon() {
 export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
   // Cerrar el menú automáticamente al cambiar de ruta
-  useEffect(() => {
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setIsOpen(false);
-  }, [pathname]);
+  }
 
   // Bloquear scroll de la página cuando el menú móvil está abierto y manejar Escape
   useEffect(() => {

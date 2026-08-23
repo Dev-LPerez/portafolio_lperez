@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 export type Certificate = {
   date: string;
@@ -90,11 +91,13 @@ export default function CertificatesList({ certificates }: CertificatesListProps
                     title={`Ver imagen de ${cert.title}`}
                     aria-label={`Ampliar imagen de ${cert.title}`}
                   >
-                    <img
+                    <Image
                       src={cert.image}
                       alt={`Certificado: ${cert.title}`}
+                      width={120}
+                      height={80}
                       className="cert-thumb-img"
-                      loading="lazy"
+                      sizes="120px"
                     />
                     <span className="cert-thumb-overlay">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -150,10 +153,14 @@ export default function CertificatesList({ certificates }: CertificatesListProps
             {/* Imagen del Certificado */}
             <div className="cert-modal-body">
               {selectedCert.image ? (
-                <img
+                <Image
                   src={selectedCert.image}
                   alt={selectedCert.title}
+                  width={900}
+                  height={600}
                   className="cert-modal-image"
+                  sizes="(max-width: 768px) 95vw, 850px"
+                  style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "75vh" }}
                 />
               ) : null}
             </div>

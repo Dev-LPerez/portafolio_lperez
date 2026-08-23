@@ -7,10 +7,14 @@ export const metadata: Metadata = {
   title: "Sobre mí",
   description:
     "Conoce a Luis Guillermo Pérez Rubio: Ingeniero de Sistemas y Desarrollador Full-Stack colombiano. Habilidades, trayectoria y formación.",
+  alternates: {
+    canonical: "/sobre-mi",
+  },
   openGraph: {
     title: "Sobre mí — Luis Guillermo Pérez Rubio",
     description:
       "Ingeniero de Sistemas & Desarrollador Full-Stack desde Colombia. Habilidades, trayectoria y formación.",
+    url: "https://lgperez.dev/sobre-mi",
   },
 };
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import { profile } from "@/lib/profile";
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
@@ -28,21 +29,105 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lgperez.dev"),
   title: {
     default: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
     template: "%s | Luis Guillermo Pérez Rubio",
   },
   description:
     "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano. Especializado en React, Next.js, Node.js y PostgreSQL.",
+  keywords: [
+    "Luis Guillermo Pérez Rubio",
+    "Luis Perez",
+    "Ingeniero de Sistemas",
+    "Desarrollador de Software",
+    "Desarrollador Full-Stack",
+    "Backend Developer",
+    "TypeScript",
+    "Next.js",
+    "NestJS",
+    "PostgreSQL",
+    "Laravel",
+    "Colombia",
+    "Montería",
+  ],
+  authors: [{ name: "Luis Guillermo Pérez Rubio", url: "https://lgperez.dev" }],
+  creator: "Luis Guillermo Pérez Rubio",
+  publisher: "Luis Guillermo Pérez Rubio",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "es_CO",
-    siteName: "LGPR — Portafolio",
+    url: "https://lgperez.dev",
+    siteName: "Luis Guillermo Pérez Rubio — Portafolio",
+    title: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
+    description:
+      "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano. Especializado en React, Next.js, Node.js y PostgreSQL.",
   },
   twitter: {
     card: "summary_large_image",
+    title: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
+    description:
+      "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano.",
+    creator: "@luisgperezrubio",
   },
-  metadataBase: new URL("https://lgpr.dev"),
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://lgperez.dev/#person",
+      name: profile.name,
+      givenName: "Luis Guillermo",
+      familyName: "Pérez Rubio",
+      jobTitle: profile.role,
+      url: "https://lgperez.dev",
+      image: "https://lgperez.dev/luisperez.jpg",
+      email: `mailto:${profile.email}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Montería",
+        addressRegion: "Córdoba",
+        addressCountry: "CO",
+      },
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: profile.education.institution,
+      },
+      sameAs: [
+        profile.social.github,
+        profile.social.linkedin,
+        profile.social.x,
+      ],
+      knowsAbout: Object.values(profile.skills).flat(),
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lgperez.dev/#website",
+      url: "https://lgperez.dev",
+      name: "Luis Guillermo Pérez Rubio — Portafolio",
+      description:
+        "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador Full-Stack.",
+      publisher: {
+        "@id": "https://lgperez.dev/#person",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -51,6 +136,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${bebasNeue.variable} ${barlow.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
       <body className="flex-1" style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Header />
         <main className="flex-1">{children}</main>
