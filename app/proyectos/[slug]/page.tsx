@@ -93,15 +93,6 @@ export default async function ProjectDetailPage(
             project.githubBackendUrl,
         }
       : {}),
-    ...(project.liveUrl
-      ? {
-          targetProduct: {
-            "@type": "WebApplication",
-            name: project.title,
-            url: project.liveUrl,
-          },
-        }
-      : {}),
   };
 
   return (
