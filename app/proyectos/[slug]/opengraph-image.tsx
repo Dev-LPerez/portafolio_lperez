@@ -108,7 +108,7 @@ export default async function Image(props: { params: Promise<{ slug: string }> }
                 color: "#d4d4d4",
               }}
             >
-              lgperez.dev
+              www.lgperez.dev
             </span>
           </div>
         </div>

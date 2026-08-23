@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "Luis Guillermo Pérez Rubio — Portafolio",
     description:
       "Ingeniero de Sistemas & Desarrollador de Software desde Colombia. Ver proyectos y experiencia.",
-    url: "https://lgperez.dev",
+    url: "https://www.lgperez.dev",
   },
 };
 

@@ -24,7 +24,7 @@ export async function generateMetadata(
     openGraph: {
       title: `${project.title} — Luis Guillermo Pérez Rubio`,
       description: project.summary,
-      url: `https://lgperez.dev/proyectos/${project.slug}`,
+      url: `https://www.lgperez.dev/proyectos/${project.slug}`,
       type: "article",
     },
     twitter: {
@@ -55,19 +55,19 @@ export default async function ProjectDetailPage(
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: "https://lgperez.dev",
+        item: "https://www.lgperez.dev",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Proyectos",
-        item: "https://lgperez.dev/proyectos",
+        item: "https://www.lgperez.dev/proyectos",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: project.title,
-        item: `https://lgperez.dev/proyectos/${project.slug}`,
+        item: `https://www.lgperez.dev/proyectos/${project.slug}`,
       },
     ],
   };
@@ -82,9 +82,9 @@ export default async function ProjectDetailPage(
     author: {
       "@type": "Person",
       name: "Luis Guillermo Pérez Rubio",
-      url: "https://lgperez.dev",
+      url: "https://www.lgperez.dev",
     },
-    url: `https://lgperez.dev/proyectos/${project.slug}`,
+    url: `https://www.lgperez.dev/proyectos/${project.slug}`,
     ...(project.githubUrl || project.githubFrontendUrl || project.githubBackendUrl
       ? {
           codeRepository:

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Proyectos — Luis Guillermo Pérez Rubio",
     description: "Trabajo seleccionado: aplicaciones web, SaaS, APIs y más.",
-    url: "https://lgperez.dev/proyectos",
+    url: "https://www.lgperez.dev/proyectos",
   },
 };
 

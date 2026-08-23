@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://lgperez.dev";
+  const baseUrl = "https://www.lgperez.dev";
 
   // Páginas estáticas principales con fechas de versión estables
   const staticRoutes: MetadataRoute.Sitemap = [

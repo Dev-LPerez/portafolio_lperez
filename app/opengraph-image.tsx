@@ -80,7 +80,7 @@ export default async function Image() {
                 textTransform: "uppercase",
               }}
             >
-              lgperez.dev
+              www.lgperez.dev
             </span>
           </div>
 

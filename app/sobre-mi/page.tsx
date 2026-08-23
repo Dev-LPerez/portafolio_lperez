@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Sobre mí — Luis Guillermo Pérez Rubio",
     description:
       "Ingeniero de Sistemas & Desarrollador Full-Stack desde Colombia. Habilidades, trayectoria y formación.",
-    url: "https://lgperez.dev/sobre-mi",
+    url: "https://www.lgperez.dev/sobre-mi",
   },
 };
 
