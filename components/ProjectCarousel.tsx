@@ -24,6 +24,11 @@ export default function ProjectCarousel({
   const dragStartRef = useRef({ x: 0, y: 0 });
   const panStartRef = useRef({ x: 0, y: 0 });
 
+  // Touch handling para Swipe y Pinch-to-Zoom
+  const touchStartRef = useRef<{ x: number; y: number; time: number }>({ x: 0, y: 0, time: 0 });
+  const touchDistanceRef = useRef<number | null>(null);
+  const lastTapRef = useRef<number>(0);
+
   const total = screenshots.length;
 
   // Reset de zoom al cambiar de slide
@@ -133,6 +138,118 @@ export default function ProjectCarousel({
     }
   };
 
+  // ── TOUCH GESTURES (SWIPE & PINCH) PARA MÓVIL ───────────
+  // Swipe en carrusel inline
+  const handleInlineTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      touchStartRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        time: Date.now(),
+      };
+    }
+  };
+
+  const handleInlineTouchEnd = (e: React.TouchEvent) => {
+    if (e.changedTouches.length === 1) {
+      const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
+      const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
+      const dt = Date.now() - touchStartRef.current.time;
+
+      // Si fue swipe horizontal predominante y rápido
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 450) {
+        if (dx < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  };
+
+  // Touch handling en Modal (Swipe cuando zoom=1, Pan cuando zoom>1, Pinch zoom con 2 dedos)
+  const handleModalTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      touchStartRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        time: Date.now(),
+      };
+
+      // Doble tap en móvil para zoom
+      const now = Date.now();
+      if (now - lastTapRef.current < 300) {
+        handleToggleZoom();
+        lastTapRef.current = 0;
+        return;
+      }
+      lastTapRef.current = now;
+
+      if (zoom > 1) {
+        setIsDragging(true);
+        dragStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        panStartRef.current = { x: pan.x, y: pan.y };
+      }
+    } else if (e.touches.length === 2) {
+      // Inicio de Pinch
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      touchDistanceRef.current = dist;
+    }
+  };
+
+  const handleModalTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && zoom > 1 && isDragging) {
+      const dx = e.touches[0].clientX - dragStartRef.current.x;
+      const dy = e.touches[0].clientY - dragStartRef.current.y;
+      setPan({
+        x: panStartRef.current.x + dx,
+        y: panStartRef.current.y + dy,
+      });
+    } else if (e.touches.length === 2 && touchDistanceRef.current !== null) {
+      // Pinch Zoom en progreso
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const factor = dist / touchDistanceRef.current;
+      if (Math.abs(factor - 1) > 0.05) {
+        if (factor > 1) {
+          handleZoomIn();
+        } else {
+          handleZoomOut();
+        }
+        touchDistanceRef.current = dist;
+      }
+    }
+  };
+
+  const handleModalTouchEnd = (e: React.TouchEvent) => {
+    setIsDragging(false);
+    touchDistanceRef.current = null;
+
+    if (e.changedTouches.length === 1 && zoom === 1) {
+      const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
+      const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
+      const dt = Date.now() - touchStartRef.current.time;
+
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4 && dt < 450) {
+        if (dx < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+  };
+
+  // Formato limpio de URL para el mockup de navegador
+  const formattedDomain = liveUrl
+    ? liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")
+    : `${title.toLowerCase().replace(/\s+/g, "-")}.app`;
+
   if (!screenshots || screenshots.length === 0) {
     return (
       <div className="browser-mockup browser-mockup--placeholder">
@@ -143,7 +260,7 @@ export default function ProjectCarousel({
             <span />
           </div>
           <div className="browser-address">
-            {liveUrl || "https://proyecto.app"}
+            {formattedDomain}
           </div>
         </div>
         <div className="screenshot-placeholder-content">
@@ -177,22 +294,22 @@ export default function ProjectCarousel({
       {/* ── CARRUSEL INLINE EN LA PÁGINA ───────────────── */}
       <div className="project-carousel-container">
         <div className="browser-mockup">
-          {/* Barra superior de navegador */}
+          {/* Barra superior de navegador responsive */}
           <div className="browser-mockup-header">
             <div className="browser-dots" aria-hidden="true">
               <span />
               <span />
               <span />
             </div>
-            <div className="browser-address">
-              {liveUrl || `https://${title.toLowerCase().replace(/\s+/g, "-")}.app`}
+            <div className="browser-address" title={liveUrl || formattedDomain}>
+              {formattedDomain}
             </div>
             <div className="carousel-counter">
               {currentIndex + 1} / {total}
             </div>
           </div>
 
-          {/* Imagen interactiva principal */}
+          {/* Imagen interactiva principal con soporte de swipe móvil */}
           <div
             className="carousel-main-view"
             onClick={() => {
@@ -200,7 +317,9 @@ export default function ProjectCarousel({
               resetZoom();
               setIsModalOpen(true);
             }}
-            title="Haz clic para abrir el visor con zoom"
+            onTouchStart={handleInlineTouchStart}
+            onTouchEnd={handleInlineTouchEnd}
+            title="Toca para ampliar en pantalla completa"
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -219,12 +338,19 @@ export default function ProjectCarousel({
               loading="eager"
             />
 
+            {/* Swipe indicator badge para móvil */}
+            {total > 1 && (
+              <div className="carousel-mobile-swipe-badge" aria-hidden="true">
+                <span>Desliza ⟷</span>
+              </div>
+            )}
+
             {/* Hover overlay hint */}
             <div className="carousel-zoom-hint" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
               </svg>
-              <span>Ver con zoom</span>
+              <span>Ampliar</span>
             </div>
           </div>
 
@@ -242,9 +368,23 @@ export default function ProjectCarousel({
               >
                 ‹
               </button>
-              <span className="carousel-nav-info">
-                Captura {currentIndex + 1} de {total}
-              </span>
+
+              <div className="carousel-dots-indicator" aria-hidden="true">
+                {screenshots.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={`carousel-dot ${idx === currentIndex ? "is-active" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      resetZoom();
+                      setCurrentIndex(idx);
+                    }}
+                    aria-label={`Ir a captura ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
               <button
                 type="button"
                 className="carousel-nav-btn"
@@ -288,7 +428,7 @@ export default function ProjectCarousel({
       {/* ── MODAL CON CARRUSEL DE PANTALLA COMPLETA & ZOOM ───── */}
       {isModalOpen && (
         <div
-          className={`cert-modal-backdrop ${isClosing ? "is-closing" : ""}`}
+          className={`cert-modal-backdrop project-modal-backdrop ${isClosing ? "is-closing" : ""}`}
           onClick={closeModal}
           role="dialog"
           aria-modal="true"
@@ -298,13 +438,13 @@ export default function ProjectCarousel({
             className={`project-modal-container ${isClosing ? "is-closing" : ""}`}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header del Modal con Controles de Zoom */}
+            {/* Header del Modal con Controles de Zoom Responsive */}
             <div className="cert-modal-header project-modal-header">
-              <div>
+              <div className="project-modal-header-info">
                 <span className="cert-modal-issuer">
-                  Captura {currentIndex + 1} de {total}
+                  {currentIndex + 1} / {total}
                 </span>
-                <h3 className="cert-modal-title">{title}</h3>
+                <h3 className="cert-modal-title project-modal-title-text">{title}</h3>
               </div>
 
               {/* Barra de Herramientas de Zoom */}
@@ -357,7 +497,7 @@ export default function ProjectCarousel({
               </div>
             </div>
 
-            {/* Cuerpo del Modal con Visor, Zoom y Drag */}
+            {/* Cuerpo del Modal con Visor, Zoom, Drag y Touch Gestures */}
             <div
               className={`project-modal-body ${zoom > 1 ? "is-zoomed" : ""} ${
                 isDragging ? "is-dragging" : ""
@@ -367,6 +507,9 @@ export default function ProjectCarousel({
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
+              onTouchStart={handleModalTouchStart}
+              onTouchMove={handleModalTouchMove}
+              onTouchEnd={handleModalTouchEnd}
             >
               {total > 1 && (
                 <button
@@ -385,7 +528,7 @@ export default function ProjectCarousel({
                 title={
                   zoom > 1
                     ? "Arrastra para mover la imagen · Doble clic para restablecer"
-                    : "Doble clic o rueda del mouse para hacer zoom"
+                    : "Doble clic o pellizca para hacer zoom"
                 }
               >
                 <img
@@ -415,26 +558,28 @@ export default function ProjectCarousel({
             </div>
 
             {/* Footer con miniaturas */}
-            <div className="project-modal-footer">
-              <div className="modal-thumbs-row">
-                {screenshots.map((shot, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className={`modal-thumb-item ${
-                      idx === currentIndex ? "is-active" : ""
-                    }`}
-                    onClick={() => {
-                      resetZoom();
-                      setCurrentIndex(idx);
-                    }}
-                    aria-label={`Ver foto ${idx + 1}`}
-                  >
-                    <img src={shot} alt={`Miniatura modal ${idx + 1}`} />
-                  </button>
-                ))}
+            {total > 1 && (
+              <div className="project-modal-footer">
+                <div className="modal-thumbs-row">
+                  {screenshots.map((shot, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`modal-thumb-item ${
+                        idx === currentIndex ? "is-active" : ""
+                      }`}
+                      onClick={() => {
+                        resetZoom();
+                        setCurrentIndex(idx);
+                      }}
+                      aria-label={`Ver foto ${idx + 1}`}
+                    >
+                      <img src={shot} alt={`Miniatura modal ${idx + 1}`} />
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}

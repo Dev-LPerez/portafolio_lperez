@@ -69,7 +69,7 @@ export const projects: Project[] = [
       "Desarrollé y modernicé una Progressive Web App (PWA) de alto rendimiento construida con React 19, TypeScript, Vite 6 y Tailwind CSS v4, conectada a Firebase Firestore (NoSQL en tiempo real) y Firebase Storage. Implementé una experiencia de usuario fluida y reactiva con layout adaptativo (PC/Movil), navegación por categorías con smooth scroll y checkout automatizado con geolocalización GPS hacia la API de WhatsApp. En el apartado administrativo, diseñé un panel POS secreto con control de sesiones, deducción automática de inventario por pedido, compresión en cliente de imágenes a WebP (~25 KB) para carga instantánea, y un módulo financiero con métricas de ventas, ticket promedio, margen neto y desglose de cajas independientes.",
     tags: ["React 19", "TypeScript", "Vite", "Tailwind CSS v4", "Firebase Firestore", "NoSQL", "PWA", "POS"],
     links: [],
-    liveUrl: "https://gomifire.netlify.app",
+    liveUrl: "https://gomifire.lgperez.dev",
     githubUrl: "https://github.com/Dev-LPerez/gomifire-menuapp",
     screenshots: [
       // "/projects/gomifire-1.png",
