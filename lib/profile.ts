@@ -71,8 +71,7 @@ export const profile = {
     { lang: "Inglés", level: "A2" },
   ],
   social: {
-    github: "https://github.com/luisgperezrubio",
+    github: "https://github.com/dev-lperez",
     linkedin: "https://linkedin.com/in/luis-guillermo-perez-rubio",
-    x: "https://x.com/luisgperezrubio",
   },
 };
