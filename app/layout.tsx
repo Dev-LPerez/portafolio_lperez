@@ -128,7 +128,6 @@ export const metadata: Metadata = {
     title: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
     description:
       "Portafolio profesional de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador Full-Stack desde Córdoba, Colombia.",
-    creator: "@luisgperezrubio",
   },
 };
 
@@ -174,7 +173,6 @@ const jsonLd = {
       sameAs: [
         profile.social.github,
         profile.social.linkedin,
-        profile.social.x,
       ],
       knowsAbout: [
         "Ingeniería de Sistemas",
