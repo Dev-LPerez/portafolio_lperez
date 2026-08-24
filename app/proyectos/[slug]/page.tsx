@@ -18,6 +18,14 @@ export async function generateMetadata(
   return {
     title: project.title,
     description: project.summary,
+    keywords: [
+      project.title,
+      `${project.title} Luis Guillermo Pérez Rubio`,
+      `${project.title} proyecto software`,
+      project.category,
+      ...project.tags,
+      `Desarrollo ${project.category} Colombia`,
+    ],
     alternates: {
       canonical: `/proyectos/${project.slug}`,
     },

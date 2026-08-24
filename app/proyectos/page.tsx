@@ -5,13 +5,24 @@ import { projects } from "@/lib/projects";
 export const metadata: Metadata = {
   title: "Proyectos",
   description:
-    "Trabajo seleccionado de Luis Guillermo Pérez Rubio. Proyectos de desarrollo web, aplicaciones y más.",
+    "Proyectos destacados de software y aplicaciones web desarrollados por Luis Guillermo Pérez Rubio. Plataformas en Laravel, Vue 3, React, Next.js, Firebase y PostgreSQL.",
+  keywords: [
+    "Proyectos Luis Guillermo Pérez Rubio",
+    "Portafolio de software",
+    "Sistema de Gestión de Refugios",
+    "NexLocal",
+    "GomiFire Menú Digital POS",
+    "Aplicaciones web Laravel PostgreSQL",
+    "Desarrollo frontend React Vue TypeScript",
+    "Casos de estudio desarrollo full-stack",
+  ],
   alternates: {
     canonical: "/proyectos",
   },
   openGraph: {
     title: "Proyectos — Luis Guillermo Pérez Rubio",
-    description: "Trabajo seleccionado: aplicaciones web, SaaS, APIs y más.",
+    description:
+      "Explora las aplicaciones web, arquitecturas backend y proyectos desarrollados por Luis Guillermo Pérez Rubio.",
     url: "https://www.lgperez.dev/proyectos",
   },
 };

@@ -6,14 +6,25 @@ import CertificatesList from "@/components/CertificatesList";
 export const metadata: Metadata = {
   title: "Sobre mí",
   description:
-    "Conoce a Luis Guillermo Pérez Rubio: Ingeniero de Sistemas y Desarrollador Full-Stack colombiano. Habilidades, trayectoria y formación.",
+    "Conoce a Luis Guillermo Pérez Rubio: Ingeniero de Sistemas egresado de la Universidad de Córdoba y Desarrollador Full-Stack con enfoque Backend. Habilidades en NestJS, TypeScript, Laravel y PostgreSQL.",
+  keywords: [
+    "Sobre mí Luis Guillermo Pérez Rubio",
+    "Luis Guillermo Pérez Rubio perfil",
+    "Ingeniero de Sistemas Universidad de Córdoba",
+    "Desarrollador Backend Montería Córdoba",
+    "Desarrollador de Software Cereté",
+    "Programador Sahagún Córdoba",
+    "Habilidades técnicas NestJS Laravel Spring Boot",
+    "Programador TypeScript Colombia",
+    "Certificaciones Platzi Udemy Luis Perez",
+  ],
   alternates: {
     canonical: "/sobre-mi",
   },
   openGraph: {
     title: "Sobre mí — Luis Guillermo Pérez Rubio",
     description:
-      "Ingeniero de Sistemas & Desarrollador Full-Stack desde Colombia. Habilidades, trayectoria y formación.",
+      "Ingeniero de Sistemas & Desarrollador Full-Stack desde Montería, Colombia. Habilidades, formación en Universidad de Córdoba y certificaciones.",
     url: "https://www.lgperez.dev/sobre-mi",
   },
 };

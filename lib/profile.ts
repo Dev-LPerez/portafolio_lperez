@@ -5,7 +5,7 @@ export const profile = {
   avatar: "/luisperez.jpg", // Puedes cambiar la imagen en public/luisperez.jpg
   role: "Ingeniero de Sistemas | Desarrollador Full-Stack (Backend Focus)",
   email: "luisperez0644@gmail.com",
-  location: "Montería, Córdoba, Colombia",
+  location: "Montería, Córdoba, Colombia (Cereté, Sahagún, Lorica y todo el departamento)",
   status: "available" as "available" | "busy",
   bio: [
     "Ingeniero de Sistemas y Desarrollador Full-Stack con fuerte inclinación hacia el desarrollo Backend, la arquitectura modular y los lenguajes fuertemente tipados como TypeScript y Java.",

@@ -4,13 +4,24 @@ import { profile } from "@/lib/profile";
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Escríbele a Luis Guillermo Pérez Rubio. Disponible para proyectos freelance y colaboraciones.",
+    "Ponte en contacto con Luis Guillermo Pérez Rubio para proyectos de desarrollo de software, servicios backend, desarrollo full-stack o consultoría técnica desde Colombia.",
+  keywords: [
+    "Contacto Luis Guillermo Pérez Rubio",
+    "Contratar desarrollador Colombia",
+    "Desarrollador freelance Montería",
+    "Desarrollador de software Cereté",
+    "Desarrollador web Sahagún Córdoba",
+    "Programador Lorica Córdoba",
+    "Servicios de desarrollo de software Córdoba",
+    "Contacto ingeniero de sistemas",
+    "Desarrollo backend NestJS Laravel",
+  ],
   alternates: {
     canonical: "/contacto",
   },
   openGraph: {
     title: "Contacto — Luis Guillermo Pérez Rubio",
-    description: "Disponible para proyectos freelance y colaboraciones. Escríbeme.",
+    description: "Disponible para proyectos freelance y colaboraciones de desarrollo de software. Escríbeme.",
     url: "https://www.lgperez.dev/contacto",
   },
 };

@@ -7,14 +7,26 @@ import { getFeaturedProjects } from "@/lib/projects";
 export const metadata: Metadata = {
   title: "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
   description:
-    "Portafolio de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador de Software colombiano especializado en React, Next.js, Node.js y PostgreSQL.",
+    "Portafolio oficial de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador Full-Stack en Montería, Colombia. Especializado en TypeScript, NestJS, Laravel, Next.js y PostgreSQL.",
+  keywords: [
+    "Luis Guillermo Pérez Rubio",
+    "Luis Perez Rubio desarrollador",
+    "Ingeniero de Sistemas Montería",
+    "Desarrollador de Software Cereté Córdoba",
+    "Desarrollador de Software Sahagún Córdoba",
+    "Desarrollador Web Lorica Córdoba",
+    "Desarrollador Backend Colombia",
+    "Desarrollador Full Stack Córdoba Colombia",
+    "TypeScript Next.js NestJS PostgreSQL",
+    "Portafolio Desarrollador Software",
+  ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Luis Guillermo Pérez Rubio — Portafolio",
     description:
-      "Ingeniero de Sistemas & Desarrollador de Software desde Colombia. Ver proyectos y experiencia.",
+      "Ingeniero de Sistemas & Desarrollador Full-Stack desde Montería, Colombia. Proyectos, arquitectura y tecnologías.",
     url: "https://www.lgperez.dev",
   },
 };
