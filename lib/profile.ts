@@ -1,11 +1,11 @@
 export const profile = {
   name: "Luis Guillermo Pérez Rubio",
-  initials: "LGP",
-  logo: "LGPR",
+  initials: "LGPR",
+  logo: "<LGPR/>",
   avatar: "/luisperez.jpg", // Puedes cambiar la imagen en public/luisperez.jpg
   role: "Ingeniero de Sistemas | Desarrollador Full-Stack (Backend Focus)",
   email: "luisperez0644@gmail.com",
-  location: "Montería, Córdoba, Colombia (Cereté, Sahagún, Lorica y todo el departamento)",
+  location: "Colombia",
   status: "available" as "available" | "busy",
   bio: [
     "Ingeniero de Sistemas y Desarrollador Full-Stack con fuerte inclinación hacia el desarrollo Backend, la arquitectura modular y los lenguajes fuertemente tipados como TypeScript y Java.",
