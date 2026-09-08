@@ -1,0 +1,327 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import { projects, getRelatedProjects, type Project } from "@/lib/projects";
+import ProjectCarousel from "@/components/ProjectCarousel";
+
+export function getStaticPaths() {
+  return projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { slug } = Astro.params;
+const related = getRelatedProjects(slug, 2);
+
+const siteUrl = "https://www.lgperez.dev";
+const canonical = `/proyectos/${project.slug}`;
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: siteUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Proyectos",
+      item: `${siteUrl}/proyectos`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: project.title,
+      item: `${siteUrl}/proyectos/${project.slug}`,
+    },
+  ],
+};
+
+const projectJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: project.title,
+  headline: project.title,
+  description: project.description,
+  programmingLanguage: project.tags,
+  author: {
+    "@type": "Person",
+    name: "Luis Guillermo Pérez Rubio",
+    url: siteUrl,
+  },
+  url: `${siteUrl}/proyectos/${project.slug}`,
+  ...(project.githubUrl || project.githubFrontendUrl || project.githubBackendUrl
+    ? {
+        codeRepository:
+          project.githubUrl ||
+          project.githubFrontendUrl ||
+          project.githubBackendUrl,
+      }
+    : {}),
+};
+---
+
+<Layout
+  title={project.title}
+  description={project.summary}
+  canonical={canonical}
+  ogType="article"
+  keywords={[
+    project.title,
+    `${project.title} Luis Guillermo Pérez Rubio`,
+    `${project.title} proyecto software`,
+    project.category,
+    ...project.tags,
+    `Desarrollo ${project.category} Colombia`,
+  ]}
+>
+  <script type="application/ld+json" set:html={JSON.stringify([breadcrumbJsonLd, projectJsonLd])} />
+
+  {/* ── CABECERA ─────────────────────────────────── */}
+  <section class="project-detail-header">
+    <div class="container">
+      {/* Breadcrumb */}
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <a href="/proyectos">Proyectos</a>
+        <span aria-hidden="true">›</span>
+        <span>{project.title}</span>
+      </nav>
+
+      {/* Categoría · Año */}
+      <div class="project-detail-meta">
+        <span class="eyebrow">{project.category}</span>
+        <span class="eyebrow">— {project.year}</span>
+      </div>
+
+      {/* Título con transición de vista compartida */}
+      <h1
+        class="display project-detail-title"
+        style={`view-transition-name: project-title-${project.slug};`}
+      >
+        {project.title}
+      </h1>
+    </div>
+  </section>
+
+  {/* ── CUERPO ──────────────────────────────────── */}
+  <section>
+    <div class="container project-detail-body">
+      {/* Contenido principal */}
+      <div class="project-main-content">
+        <p class="project-summary">{project.summary}</p>
+        <p class="project-description">{project.description}</p>
+
+        {/* Botones de acción principales */}
+        {(project.liveUrl || project.githubUrl || project.githubFrontendUrl || project.githubBackendUrl) && (
+          <div class="project-cta-row">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--solid"
+                id="project-live-btn"
+              >
+                Visitar sitio web ↗
+              </a>
+            )}
+            {project.githubFrontendUrl && (
+              <a
+                href={project.githubFrontendUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline"
+                id="project-github-frontend-btn"
+              >
+                GitHub (Frontend) ↗
+              </a>
+            )}
+            {project.githubBackendUrl && (
+              <a
+                href={project.githubBackendUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline"
+                id="project-github-backend-btn"
+              >
+                GitHub (Backend) ↗
+              </a>
+            )}
+            {project.githubUrl && !project.githubFrontendUrl && !project.githubBackendUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline"
+                id="project-github-btn"
+              >
+                Ver código en GitHub ↗
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* ── GALERÍA DE CAPTURAS DE PANTALLA (CARRUSEL REACTIVO) ── */}
+        <div class="project-screenshots-section">
+          <h2 class="display projects-teaser-title" style="margin-bottom: 1rem;">
+            Capturas de pantalla
+          </h2>
+          <ProjectCarousel
+            title={project.title}
+            slug={project.slug}
+            liveUrl={project.liveUrl}
+            screenshots={project.screenshots || []}
+            client:load
+          />
+        </div>
+      </div>
+
+      {/* Sidebar */}
+      <aside class="project-sidebar">
+        {/* Rol */}
+        <div>
+          <p class="project-sidebar-section-title">Rol</p>
+          <p style="font-size: 0.9375rem;">Desarrollador principal</p>
+        </div>
+
+        {/* Tecnologías */}
+        <div>
+          <p class="project-sidebar-section-title">Tecnologías</p>
+          <div class="project-tags">
+            {project.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Enlaces */}
+        {(project.liveUrl || project.githubUrl || project.githubFrontendUrl || project.githubBackendUrl || (project.links && project.links.length > 0)) && (
+          <div>
+            <p class="project-sidebar-section-title">Enlaces</p>
+            <div class="project-links">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Página web en vivo ↗
+                </a>
+              )}
+              {project.githubFrontendUrl && (
+                <a
+                  href={project.githubFrontendUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  GitHub (Frontend) ↗
+                </a>
+              )}
+              {project.githubBackendUrl && (
+                <a
+                  href={project.githubBackendUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  GitHub (Backend) ↗
+                </a>
+              )}
+              {project.githubUrl && !project.githubFrontendUrl && !project.githubBackendUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  Repositorio en GitHub ↗
+                </a>
+              )}
+              {project.links && project.links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  {/* ── MÁS PROYECTOS ───────────────────────────── */}
+  {related.length > 0 && (
+    <section class="related-section">
+      <div class="container">
+        <h2 class="display related-title">Más proyectos</h2>
+        <div class="related-grid">
+          {related.map((rel) => (
+            <a
+              href={`/proyectos/${rel.slug}`}
+              class="project-card"
+              style="text-decoration: none;"
+              data-astro-prefetch
+            >
+              {rel.screenshots && rel.screenshots.length > 0 ? (
+                <div class="project-card-image-wrap">
+                  <Image
+                    src={rel.screenshots[0]}
+                    alt={`Vista previa de ${rel.title}`}
+                    width={640}
+                    height={360}
+                    class="project-card-cover-img"
+                    style={`view-transition-name: project-cover-${rel.slug};`}
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div class="project-card-blueprint-wrap" style={`view-transition-name: project-cover-${rel.slug};`}>
+                  <div class="blueprint-grid-pattern" aria-hidden="true"></div>
+                  <div class="blueprint-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="blueprint-icon" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 3h13.5m-9-9h9m-9 3h9m-11.25 6h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zM3.75 3.75h16.5a1.5 1.5 0 011.5 1.5v13.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5z" />
+                    </svg>
+                    <span>Arquitectura & Backend</span>
+                  </div>
+                </div>
+              )}
+              <div class="project-card-meta">
+                <span class="project-card-year">{rel.year}</span>
+                <span class="project-card-category">— {rel.category}</span>
+              </div>
+              <h3
+                class="project-card-title"
+                style={`view-transition-name: project-title-${rel.slug};`}
+              >
+                {rel.title}
+              </h3>
+              <p class="project-card-summary">{rel.summary}</p>
+              <div class="project-card-tags">
+                {rel.tags.slice(0, 3).map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>

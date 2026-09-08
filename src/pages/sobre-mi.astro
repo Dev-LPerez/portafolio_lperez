@@ -1,0 +1,271 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { profile } from "@/lib/profile";
+import TechIcon from "@/components/TechIcon";
+import CertificatesList from "@/components/CertificatesList";
+import { Image } from "astro:assets";
+
+const { bio, skills, education, certificates, languages } = profile;
+---
+
+<Layout
+  title="Sobre mí"
+  description="Conoce a Luis Guillermo Pérez Rubio: Ingeniero de Sistemas egresado de la Universidad de Córdoba y Desarrollador Full-Stack con enfoque Backend. Habilidades en NestJS, TypeScript, Laravel y PostgreSQL."
+  canonical="/sobre-mi"
+  keywords={[
+    "Sobre mí Luis Guillermo Pérez Rubio",
+    "Luis Guillermo Pérez Rubio perfil",
+    "Ingeniero de Sistemas Universidad de Córdoba",
+    "Desarrollador Backend Montería Córdoba",
+    "Desarrollador de Software Cereté",
+    "Programador Sahagún Córdoba",
+    "Habilidades técnicas NestJS Laravel Spring Boot",
+    "Programador TypeScript Colombia",
+    "Certificaciones Platzi Udemy Luis Perez",
+  ]}
+>
+  {/* ── CABECERA ─────────────────────────────────── */}
+  <section class="section-header rule-bottom">
+    <div class="container">
+      <h1 class="display section-title">Sobre mí</h1>
+      <p class="section-sub">
+        Ingeniero de Sistemas y Desarrollador Full-Stack enfocado en arquitectura
+        backend, sistemas modulares y programación fuertemente tipada.
+      </p>
+    </div>
+  </section>
+
+  {/* ── BIO + SIDEBAR ────────────────────────────── */}
+  <section class="rule-bottom">
+    <div class="container about-body">
+      {/* Biografía */}
+      <div class="about-bio">
+        {bio.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+
+      {/* Datos clave */}
+      <aside class="about-sidebar">
+        <dl class="about-dl">
+          <dt>Rol</dt>
+          <dd>{profile.role}</dd>
+
+          <dt>Disponibilidad</dt>
+          <dd>
+            <span
+              class={`status-dot ${
+                profile.status === "available"
+                  ? "status-dot--available"
+                  : "status-dot--busy"
+              }`}
+              aria-hidden="true"
+            ></span>
+            {profile.status === "available"
+              ? "Abierto a nuevas oportunidades"
+              : "Comprometido actualmente"}
+          </dd>
+
+          <dt>Contacto directo</dt>
+          <dd>
+            <a href={`mailto:${profile.email}`} aria-label={`Enviar correo a ${profile.email}`}>
+              {profile.email}
+            </a>
+          </dd>
+
+          <dt>Idiomas</dt>
+          {languages.map(({ lang, level }) => (
+            <dd>
+              {lang} — {level}
+            </dd>
+          ))}
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  {/* ── HABILIDADES ─────────────────────────────── */}
+  <section class="skills-section rule-bottom">
+    <div class="container">
+      <h2 class="display skills-section-title">Habilidades Técnicas</h2>
+      <div class="skills-grid">
+        {Object.entries(skills).map(([category, items]) => (
+          <div>
+            <p class="skill-group-title">{category}</p>
+            <ul class="skill-list">
+              {items.map((tech) => {
+                const iconName = tech.split(" (")[0].split(" /")[0].trim();
+                return (
+                  <li class="skill-item">
+                    <span class="skill-icon">
+                      <TechIcon name={iconName} className="w-full h-full" />
+                    </span>
+                    {tech}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── EDUCACIÓN ───────────────────────────────── */}
+  <section class="timeline-section rule-bottom" id="educacion">
+    <div class="container">
+      <h2 class="display timeline-section-title">Educación</h2>
+      <div class="timeline" role="list">
+        <article class="timeline-entry edu-timeline-entry" role="listitem">
+          <p class="timeline-year">{education.period}</p>
+          <div class="edu-entry-main">
+            <div class="edu-entry-info">
+              <p class="timeline-role">{education.degree}</p>
+              <p class="timeline-company">
+                <a
+                  href={education.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="edu-institution-link"
+                  title="Visitar portal oficial de la Universidad de Córdoba"
+                >
+                  {education.institution}
+                  <span class="edu-link-icon" aria-hidden="true">↗</span>
+                </a>
+              </p>
+              <p class="timeline-detail">Promedio académico: <strong>{education.gpa}</strong></p>
+            </div>
+
+            {/* Botón para abrir y ampliar la imagen del logo */}
+            <button
+              type="button"
+              class="edu-logo-wrapper edu-logo-btn"
+              id="open-edu-logo-btn"
+              aria-label={`Ampliar escudo oficial de la ${education.institution}`}
+              title={`Ampliar imagen de la ${education.institution}`}
+            >
+              <Image
+                src={education.logo}
+                alt={`Escudo institucional de la ${education.institution}`}
+                width={72}
+                height={108}
+                class="edu-logo-img"
+                loading="lazy"
+              />
+              <span class="edu-logo-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {/* ── MODAL PARA AMPLIAR LOGO DE EDUCACIÓN ──────── */}
+  <div
+    id="edu-logo-modal"
+    class="cert-modal-backdrop"
+    style="display: none;"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="edu-logo-modal-title"
+    tabindex="-1"
+  >
+    <div class="cert-modal-container" id="edu-logo-modal-container">
+      <div class="cert-modal-header">
+        <div>
+          <span class="cert-modal-issuer">{education.period} — Montería, Colombia</span>
+          <h3 id="edu-logo-modal-title" class="cert-modal-title">
+            {education.institution} — Escudo Oficial
+          </h3>
+        </div>
+        <button
+          type="button"
+          class="cert-modal-close"
+          id="close-edu-logo-btn"
+          aria-label="Cerrar modal"
+        >
+          ✕
+        </button>
+      </div>
+      <div class="cert-modal-body" style="padding: 2rem; display: flex; justify-content: center; align-items: center; background-color: #ffffff;">
+        <Image
+          src={education.logo}
+          alt={`Escudo oficial de la ${education.institution}`}
+          width={450}
+          height={680}
+          class="cert-modal-image"
+          style="width: auto; height: auto; max-width: 100%; max-height: 65vh; object-fit: contain;"
+        />
+      </div>
+      <div class="cert-modal-footer">
+        <p class="cert-modal-detail">
+          {education.degree} • Promedio: {education.gpa}
+        </p>
+        <a
+          href={education.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--solid cert-modal-btn"
+        >
+          Portal institucional ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const openBtn = document.getElementById("open-edu-logo-btn");
+      const modal = document.getElementById("edu-logo-modal");
+      const closeBtn = document.getElementById("close-edu-logo-btn");
+      const container = document.getElementById("edu-logo-modal-container");
+
+      if (!openBtn || !modal || !closeBtn || !container) return;
+
+      function openModal() {
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        modal.classList.add("is-closing");
+        container.classList.add("is-closing");
+        setTimeout(() => {
+          modal.style.display = "none";
+          modal.classList.remove("is-closing");
+          container.classList.remove("is-closing");
+          document.body.style.overflow = "";
+          openBtn.focus();
+        }, 200);
+      }
+
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.style.display === "flex") {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+
+  {/* ── CERTIFICADOS (CON MODAL INTERACTIVO) ─────── */}
+  <section class="timeline-section" id="certificados">
+    <div class="container">
+      <h2 class="display timeline-section-title">Certificados</h2>
+      <CertificatesList certificates={certificates} client:load />
+    </div>
+  </section>
+</Layout>

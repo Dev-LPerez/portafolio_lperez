@@ -1,0 +1,186 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import { profile } from "@/lib/profile";
+import { getFeaturedProjects } from "@/lib/projects";
+
+const featured = getFeaturedProjects();
+const { stats } = profile;
+---
+
+<Layout
+  title="Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software"
+  description="Portafolio oficial de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador Full-Stack en Montería, Colombia. Especializado en TypeScript, NestJS, Laravel, Next.js y PostgreSQL."
+  canonical="/"
+>
+  {/* ── HERO ────────────────────────────────────── */}
+
+  <section class="hero rule-bottom">
+    <div class="container">
+      {/* Top row: status con aura viva */}
+      <div class="hero-top">
+        <span class="hero-status">
+          <span class="hero-status-dot" aria-hidden="true"></span>
+          Disponible para proyectos
+        </span>
+      </div>
+
+      {/* Nombre y Foto alineados proporcionalmente con animación de autor */}
+      <div class="hero-title-row">
+        <h1 class="display hero-title animate-hero-title">
+          Luis Guillermo
+          <br />
+          Pérez Rubio
+        </h1>
+
+        <div class="hero-photo-frame animate-hero-photo" aria-label={profile.name}>
+          {profile.avatar ? (
+            <Image
+              src={profile.avatar}
+              alt={profile.name}
+              width={160}
+              height={160}
+              class="hero-photo-img"
+              loading="eager"
+            />
+          ) : (
+            <span class="hero-photo-initials">{profile.initials}</span>
+          )}
+        </div>
+      </div>
+
+      {/* Intro */}
+      <p class="hero-intro animate-hero-intro">
+        Ingeniero de Sistemas y Desarrollador Full-Stack apasionado por el Backend, la arquitectura modular y la programación tipada (TypeScript, NestJS, Java). Construyo APIs robustas, monolitos bien estructurados y soluciones con bases de datos relacionales como PostgreSQL.
+      </p>
+
+      {/* CTAs */}
+      <div class="hero-ctas animate-hero-ctas">
+        <a href="/proyectos" class="btn btn--solid" id="hero-cta-projects">
+          Ver proyectos
+        </a>
+        <a
+          href={`mailto:${profile.email}`}
+          class="btn btn--outline"
+          id="hero-cta-contact"
+        >
+          Trabajemos juntos
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  {/* ── STATS STRIP (ANIMACIÓN EDITORIAL FLUIDA EN SCROLL) ───────────── */}
+  <section class="stats-strip rule-bottom" aria-label="Estadísticas">
+    <div class="container">
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-item" style="--i: 0;">
+          <p class="stat-number display">
+            {stats.years}<span class="stat-plus" aria-hidden="true">+</span>
+          </p>
+          <p class="stat-label">Años de experiencia</p>
+        </div>
+        <div class="stat-item" style="--i: 1;">
+          <p class="stat-number display">
+            {stats.projects}<span class="stat-plus" aria-hidden="true">+</span>
+          </p>
+          <p class="stat-label">Proyectos construidos</p>
+        </div>
+        <div class="stat-item" style="--i: 2;">
+          <p class="stat-number display">
+            {stats.technologies}<span class="stat-plus" aria-hidden="true">+</span>
+          </p>
+          <p class="stat-label">Tecnologías dominadas</p>
+        </div>
+        <div class="stat-item" style="--i: 3;">
+          <p class="stat-number display">
+            {stats.certifications}<span class="stat-plus" aria-hidden="true">+</span>
+          </p>
+          <p class="stat-label">Certificaciones oficiales</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── PROYECTOS DESTACADOS ─────────────────────── */}
+  <section class="projects-teaser rule-bottom">
+
+
+    <div class="container">
+      <div class="projects-teaser-header">
+        <h2 class="display projects-teaser-title">Proyectos destacados</h2>
+        <a href="/proyectos" class="projects-teaser-link">
+          Ver todos →
+        </a>
+      </div>
+
+      <div class="projects-grid">
+        {featured.map((project) => (
+          <a
+            href={`/proyectos/${project.slug}`}
+            class="project-card"
+            style={{ textDecoration: "none" }}
+            data-astro-prefetch
+          >
+            {project.screenshots && project.screenshots.length > 0 ? (
+              <div class="project-card-image-wrap">
+                <Image
+                  src={project.screenshots[0]}
+                  alt={`Vista previa de ${project.title}`}
+                  width={640}
+                  height={360}
+                  class="project-card-cover-img"
+                  style={`view-transition-name: project-cover-${project.slug};`}
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div class="project-card-blueprint-wrap" style={`view-transition-name: project-cover-${project.slug};`}>
+                <div class="blueprint-grid-pattern" aria-hidden="true"></div>
+                <div class="blueprint-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="blueprint-icon" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 3h13.5m-9-9h9m-9 3h9m-11.25 6h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zM3.75 3.75h16.5a1.5 1.5 0 011.5 1.5v13.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5z" />
+                  </svg>
+                  <span>Arquitectura & Backend</span>
+                </div>
+              </div>
+            )}
+            <div class="project-card-meta">
+              <span class="project-card-year">{project.year}</span>
+              <span class="project-card-category">— {project.category}</span>
+            </div>
+            <h3
+              class="project-card-title"
+              style={`view-transition-name: project-title-${project.slug};`}
+            >
+              {project.title}
+            </h3>
+            <p class="project-card-summary">{project.summary}</p>
+            <div class="project-card-tags">
+              {project.tags.slice(0, 3).map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+
+  </section>
+
+  {/* ── TEASER SOBRE MÍ ─────────────────────────── */}
+  <section class="about-teaser">
+    <div class="container about-teaser-inner">
+      <p class="about-teaser-phrase">
+        Ingeniero de Sistemas Y Desarrollador Full-Stack,
+        <br />
+        Diseñando soluciones robustas.
+      </p>
+      <a href="/sobre-mi" class="about-teaser-link" data-astro-prefetch>
+        Conocer más sobre mí →
+      </a>
+    </div>
+  </section>
+</Layout>

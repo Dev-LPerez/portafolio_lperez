@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-08T03:26:50.000Z",
+  "title": "Design System: Luis Guillermo Pérez Rubio Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Deep Ink",
+        "canonical": "oklch(9% 0 0)",
+        "tonalRamp": [
+          "oklch(12% 0 0)",
+          "oklch(22% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(62% 0 0)",
+          "oklch(76% 0 0)",
+          "oklch(88% 0 0)",
+          "oklch(97% 0 0)"
+        ]
+      },
+      "primary-soft": {
+        "role": "primary",
+        "displayName": "Muted Ink",
+        "canonical": "oklch(30% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Clean Canvas",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(10% 0 0)",
+          "oklch(20% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(92% 0 0)",
+          "oklch(100% 0 0)"
+        ]
+      },
+      "neutral-paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "oklch(97% 0 0)",
+        "tonalRamp": [
+          "oklch(13% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(40% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(82% 0 0)",
+          "oklch(92% 0 0)",
+          "oklch(97% 0 0)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Hairline Border",
+        "canonical": "oklch(87% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(40% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Structural Rule",
+        "canonical": "oklch(80% 0 0)",
+        "tonalRamp": [
+          "oklch(18% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(60% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(90% 0 0)",
+          "oklch(96% 0 0)"
+        ]
+      },
+      "status-available": {
+        "role": "tertiary",
+        "displayName": "Signal Emerald",
+        "canonical": "oklch(65% 0.17 145)",
+        "tonalRamp": [
+          "oklch(25% 0.15 145)",
+          "oklch(35% 0.16 145)",
+          "oklch(45% 0.17 145)",
+          "oklch(55% 0.17 145)",
+          "oklch(65% 0.17 145)",
+          "oklch(75% 0.15 145)",
+          "oklch(85% 0.11 145)",
+          "oklch(95% 0.05 145)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Horizon",
+        "purpose": "Hero title and primary section headlines in monumental Bebas Neue."
+      },
+      "headline": {
+        "displayName": "Project Headline",
+        "purpose": "Project and case study titles."
+      },
+      "title": {
+        "displayName": "Section Title",
+        "purpose": "Timeline roles, dialog titles, and category headers."
+      },
+      "body": {
+        "displayName": "Narrative Body",
+        "purpose": "Biographical narratives, project summaries, and technical notes."
+      },
+      "label": {
+        "displayName": "Micro Label",
+        "purpose": "Status tags, eyebrows, table captions, and metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "surface-rest",
+        "value": "0 2px 8px rgba(0, 0, 0, 0.04)",
+        "purpose": "Subtle grounding for interactive tiles and emblem frames at rest."
+      },
+      {
+        "name": "surface-hover",
+        "value": "0 8px 20px -4px rgba(0, 0, 0, 0.12)",
+        "purpose": "Elevation feedback upon hover on buttons and interactive cards."
+      },
+      {
+        "name": "modal-depth",
+        "value": "0 30px 60px -15px rgba(0, 0, 0, 0.6)",
+        "purpose": "Floating focus backdrop for certificate and emblem zoom dialogs."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-editorial",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Snappy physical response for hover offsets, slide drawers, and modal transitions."
+      },
+      {
+        "name": "duration-fast",
+        "value": "180ms",
+        "purpose": "Color and border hover transitions."
+      },
+      {
+        "name": "duration-dialog",
+        "value": "220ms",
+        "purpose": "Dialog opening and backdrop fade animations."
+      }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "480px" },
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "container-max", "value": "1080px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Solid Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid primary action button with 44px minimum touch target and tactile hover feedback.",
+      "html": "<button class=\"ds-btn-solid\">VER PROYECTOS <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-solid { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 12px 24px; min-height: 44px; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em; border-radius: 4px; border: 1.5px solid #161616; background-color: #161616; color: #ffffff; cursor: pointer; text-transform: uppercase; transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.15s ease; } .ds-btn-solid:hover { background-color: #4a4a4a; border-color: #4a4a4a; } .ds-btn-solid:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Ghost outline button that inverts cleanly to solid fill upon hover.",
+      "html": "<button class=\"ds-btn-outline\">CONTACTAR AHORA</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 12px 24px; min-height: 44px; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em; border-radius: 4px; border: 1.5px solid #161616; background-color: transparent; color: #161616; cursor: pointer; text-transform: uppercase; transition: background-color 0.18s ease, color 0.18s ease, transform 0.15s ease; } .ds-btn-outline:hover { background-color: #161616; color: #ffffff; } .ds-btn-outline:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Status Indicator",
+      "kind": "custom",
+      "description": "Functional pulsing green indicator denoting live availability for engineering engagements.",
+      "html": "<div class=\"ds-status\"><span class=\"ds-status-dot\"></span> DISPONIBLE PARA PROYECTOS</div>",
+      "css": ".ds-status { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Barlow', sans-serif; font-size: 0.8125rem; font-weight: 500; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.08em; } .ds-status-dot { width: 9px; height: 9px; border-radius: 50%; background-color: #22c55e; animation: dsPulse 2s ease-in-out infinite; } @keyframes dsPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }"
+    },
+    {
+      "name": "Editorial Project Row",
+      "kind": "card",
+      "description": "Architectural list row with index numeral, title shift, and hairline borders.",
+      "html": "<div class=\"ds-proj-row\"><span class=\"ds-proj-num\">01</span><div class=\"ds-proj-body\"><div class=\"ds-proj-meta\">SISTEMA WEB • 2025</div><h3 class=\"ds-proj-title\">DOCUMANAGER PRO</h3><p class=\"ds-proj-desc\">Plataforma de gestión documental y firma biométrica digital.</p></div><span class=\"ds-proj-arrow\">→</span></div>",
+      "css": ".ds-proj-row { display: grid; grid-template-columns: 2.25rem 1fr auto; align-items: center; gap: 1.5rem; padding: 1.5rem 1rem; border-bottom: 1px solid #dedede; border-top: 1px solid #dedede; background: #ffffff; cursor: pointer; transition: background-color 0.2s ease, padding-left 0.2s ease; font-family: 'Barlow', sans-serif; } .ds-proj-row:hover { background-color: #f7f7f7; padding-left: 1.5rem; } .ds-proj-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #808080; } .ds-proj-meta { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: #808080; text-transform: uppercase; margin-bottom: 0.25rem; } .ds-proj-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.75rem; letter-spacing: -0.01em; color: #161616; margin: 0 0 0.25rem; transition: transform 0.2s ease; } .ds-proj-row:hover .ds-proj-title { transform: translateX(4px); } .ds-proj-desc { font-size: 0.9rem; color: #4a4a4a; margin: 0; line-height: 1.5; } .ds-proj-arrow { font-size: 1.25rem; color: #808080; transition: transform 0.2s ease, color 0.2s ease; } .ds-proj-row:hover .ds-proj-arrow { transform: translateX(4px); color: #161616; }"
+    },
+    {
+      "name": "Technology Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Hairline tag badge for skills and stack taxonomy.",
+      "html": "<span class=\"ds-tag\">ASTRO</span>",
+      "css": ".ds-tag { display: inline-block; font-family: 'Barlow', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid #dedede; border-radius: 4px; padding: 4px 10px; color: #4a4a4a; background-color: #f7f7f7; }"
+    },
+    {
+      "name": "Institutional Emblem Enclosure",
+      "kind": "custom",
+      "description": "Tactile university crest trigger tile with subtle depth and expand badge.",
+      "html": "<button class=\"ds-edu-tile\" aria-label=\"Ampliar escudo\"><div class=\"ds-edu-box\"><span class=\"ds-edu-crest\">UNICÓRDOBA</span><span class=\"ds-edu-badge\">🔍</span></div></button>",
+      "css": ".ds-edu-tile { background: transparent; border: none; padding: 0; cursor: pointer; } .ds-edu-box { position: relative; display: flex; align-items: center; justify-content: center; background-color: #ffffff; border: 1px solid #dedede; border-radius: 4px; padding: 0.6rem 0.75rem; min-height: 56px; min-width: 65px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease; } .ds-edu-crest { font-family: 'Barlow', sans-serif; font-size: 0.75rem; font-weight: 700; color: #161616; letter-spacing: 0.05em; } .ds-edu-tile:hover .ds-edu-box { transform: translateY(-3px); border-color: #161616; box-shadow: 0 8px 20px -4px rgba(0,0,0,0.12); } .ds-edu-badge { position: absolute; bottom: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; background-color: #161616; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 10px; border: 2px solid #ffffff; opacity: 0; transform: scale(0.7); transition: opacity 0.2s ease, transform 0.2s ease; } .ds-edu-tile:hover .ds-edu-badge { opacity: 1; transform: scale(1); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Structural Blueprint",
+    "overview": "An architectural, modernist Swiss aesthetic that treats software engineering as high-precision craft. The portfolio prioritizes content density, crisp typographic hierarchy, and purposeful physical feedback over ornamental noise.\n\nThe visual language communicates disciplined engineering authority: pure monochrome contrasts, rigorous hairline rules, generous spatial rhythm, and responsive View Transitions that mimic physical layout expansions.",
+    "keyCharacteristics": [
+      "Strict monochrome base calibrated in OKLCH with functional signal emerald for real-time availability.",
+      "Monumental display headlines in Bebas Neue paired with readable Barlow body text.",
+      "Compact 1080px maximum container width providing immediate scanning density without horizontal sprawl.",
+      "1px hairline rules anchoring modular content blocks, timeline tracks, and editorial project rows.",
+      "Tactile interactive primitives: institutional emblems, certificate zoom overlays, and responsive mobile drawers."
+    ],
+    "rules": [
+      {
+        "name": "The Rarity Rule",
+        "body": "Color is reserved exclusively for vital status (availability dot) and code syntax. The entire interface remains monochrome so project artifacts lead.",
+        "section": "colors"
+      },
+      {
+        "name": "The Inversion Doctrine",
+        "body": "Dark mode is an exact perceptual inversion of lightness channels, preserving the crisp hairline geometry without introducing muddy shadows.",
+        "section": "colors"
+      },
+      {
+        "name": "The Bebas Horizon Rule",
+        "body": "All major structural sections open with an uppercase Bebas Neue headline tracking at -0.01em with a tight line-height of 0.92, grounding the section before narrative copy unfolds.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces remain anchored on the canvas at rest. Depth is never an ornament; it only signals interactivity or active modal focus.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the strict monochrome color discipline across all new screens and components.",
+      "Do use var(--color-ink) and var(--color-background) tokens to ensure seamless dark mode adaptability.",
+      "Do maintain a strict 44px minimum touch target for every interactive button, link, and trigger.",
+      "Do provide explicit accessible names (aria-label) and keyboard triggers (Escape, Enter) on all interactive dialogs.",
+      "Do respect prefers-reduced-motion across all view transitions, pulse animations, and hover transforms."
+    ],
+    "donts": [
+      "Don't introduce colored background cards, pastel tints, or decorative gradient text.",
+      "Don't use generic unicode emojis in place of clean, authored SVG icons from TechIcon.",
+      "Don't exceed the 1080px maximum container width on standard page sections.",
+      "Don't break tabular numeric alignment in counters or timeline dates."
+    ]
+  }
+}

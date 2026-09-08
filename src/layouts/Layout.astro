@@ -1,0 +1,121 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import "@/styles/globals.css";
+import { profile } from "@/lib/profile";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  keywords?: string[];
+}
+
+const {
+  title = "Luis Guillermo Pérez Rubio — Ingeniero de Sistemas & Desarrollador de Software",
+  description = "Portafolio oficial de Luis Guillermo Pérez Rubio, Ingeniero de Sistemas y Desarrollador Full-Stack en Montería, Colombia. Especializado en TypeScript, NestJS, Laravel, Next.js y PostgreSQL.",
+  canonical = Astro.url.pathname,
+  ogImage = "/og-image.png",
+  ogType = "website",
+  keywords = [
+    "Luis Guillermo Pérez Rubio",
+    "Luis Perez Rubio desarrollador",
+    "Ingeniero de Sistemas Montería",
+    "Desarrollador de Software Cereté Córdoba",
+    "Desarrollador Backend Colombia",
+    "Desarrollador Full Stack Córdoba Colombia",
+    "TypeScript Next.js NestJS PostgreSQL",
+    "Portafolio Desarrollador Software",
+  ],
+} = Astro.props;
+
+const siteUrl = "https://www.lgperez.dev";
+const canonicalUrl = new URL(canonical, siteUrl).href;
+const fullOgImageUrl = new URL(ogImage, siteUrl).href;
+
+const fullTitle = title.includes("Luis Guillermo")
+  ? title
+  : `${title} — Luis Guillermo Pérez Rubio`;
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.role,
+  url: siteUrl,
+  sameAs: [profile.social.github, profile.social.linkedin],
+  email: profile.email,
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "CO",
+    addressRegion: "Córdoba",
+  },
+  knowsAbout: [
+    "Software Engineering",
+    "Backend Architecture",
+    "TypeScript",
+    "NestJS",
+    "Laravel",
+    "PostgreSQL",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* SEO Primario */}
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Luis Guillermo Pérez Rubio" />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImageUrl} />
+
+    {/* Preconnect Fonts */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* JSON-LD Schema */}
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+
+    {/* Astro View Transitions con animación fluida */}
+    <ClientRouter />
+  </head>
+  <body>
+    <Header />
+    <main class="flex-1" id="main-content">
+      <slot />
+    </main>
+    <Footer />
+</body>
+</html>

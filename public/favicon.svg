@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" width="132" height="132">
+  <defs>
+    <style>
+      .stamp-frame {
+        fill: none;
+        stroke: #161616;
+        stroke-width: 4;
+      }
+      .stamp-glyph {
+        font-family: 'Bebas Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 54px;
+        font-weight: 400;
+        fill: #161616;
+        text-anchor: middle;
+        dominant-baseline: alphabetic;
+      }
+      .stamp-dot {
+        fill: #3aa65a;
+      }
+      @media (prefers-color-scheme: dark) {
+        .stamp-frame { stroke: #f7f7f7; }
+        .stamp-glyph { fill: #f7f7f7; }
+      }
+    </style>
+  </defs>
+
+  <!-- Marco del Sello Concepto A exacto de conceptlogos.html -->
+  <rect x="6" y="14" width="108" height="108" class="stamp-frame" />
+
+  <!-- Iniciales LP en Bebas Neue -->
+  <text x="60" y="88" class="stamp-glyph">LP</text>
+
+  <!-- Acento Verde de Disponibilidad (#3aa65a) -->
+  <rect x="107" y="3" width="18" height="18" rx="2" class="stamp-dot" />
+</svg>

@@ -1,0 +1,139 @@
+---
+interface Props {
+  className?: string;
+  variant?: "mark" | "wordmark"; // "mark" = Concepto A (sello LP), "wordmark" = Concepto B (LGPEREZ / .DEV)
+  size?: "sm" | "md" | "lg";
+}
+
+const { className = "", variant = "wordmark", size = "md" } = Astro.props;
+---
+
+<span class={`brand-logo brand-logo--${variant} brand-logo--${size} ${className}`} aria-hidden="true">
+  {variant === "wordmark" ? (
+    <span class="brand-wordmark">
+      <span class="brand-wordmark-line1">LGPEREZ</span>
+      <span class="brand-wordmark-line2">.DEV</span>
+    </span>
+  ) : (
+    <span class="brand-mark-sello">
+      <span class="brand-mark-text">LP</span>
+    </span>
+  )}
+</span>
+
+<style>
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: currentColor;
+    user-select: none;
+  }
+
+  /* ─────────────────────────────────────────────
+     CONCEPTO B: WORDMARK PARTIDO (LGPEREZ / .DEV)
+     Basado en conceptlogos.html Opción B
+  ───────────────────────────────────────────── */
+  .brand-wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    font-family: var(--font-display, "Bebas Neue", sans-serif);
+    line-height: 0.88;
+    text-align: left;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .brand-wordmark-line1 {
+    display: block;
+    color: var(--color-foreground, currentColor);
+    font-size: 1.45rem;
+    transition: color 0.18s ease;
+  }
+
+  .brand-wordmark-line2 {
+    display: block;
+    color: var(--color-available, #3aa65a);
+    font-size: 1.45rem;
+    transition: transform 0.18s ease;
+  }
+
+  /* Tamaños Wordmark */
+  .brand-logo--sm.brand-logo--wordmark .brand-wordmark-line1,
+  .brand-logo--sm.brand-logo--wordmark .brand-wordmark-line2 {
+    font-size: 1.15rem;
+  }
+
+  .brand-logo--md.brand-logo--wordmark .brand-wordmark-line1,
+  .brand-logo--md.brand-logo--wordmark .brand-wordmark-line2 {
+    font-size: 1.45rem;
+  }
+
+  .brand-logo--lg.brand-logo--wordmark .brand-wordmark-line1,
+  .brand-logo--lg.brand-logo--wordmark .brand-wordmark-line2 {
+    font-size: 1.85rem;
+  }
+
+  /* ─────────────────────────────────────────────
+     CONCEPTO A: SELLO / MONOGRAMA (LP)
+     Ideal para favicon y badges
+  ───────────────────────────────────────────── */
+  .brand-mark-sello {
+    font-family: var(--font-display, "Bebas Neue", sans-serif);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    border: 2px solid currentColor;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s ease;
+  }
+
+  .brand-mark-sello::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 7px;
+    height: 7px;
+    background: var(--color-available, #3aa65a);
+    border-radius: 1px;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .brand-mark-text {
+    display: block;
+  }
+
+  .brand-logo--sm .brand-mark-sello {
+    font-size: 1.35rem;
+    padding: 0.18rem 0.32rem 0.1rem;
+  }
+  .brand-logo--md .brand-mark-sello {
+    font-size: 1.85rem;
+    padding: 0.22rem 0.42rem 0.12rem;
+  }
+
+  /* Microinteracciones Impeccable al interactuar con el enlace */
+  :global(a:hover) .brand-wordmark,
+  :global(a:focus-visible) .brand-wordmark {
+    transform: translateY(-1px);
+  }
+
+  :global(a:hover) .brand-wordmark-line2,
+  :global(a:focus-visible) .brand-wordmark-line2 {
+    transform: translateX(1.5px);
+  }
+
+  :global(a:hover) .brand-mark-sello,
+  :global(a:focus-visible) .brand-mark-sello {
+    transform: translateY(-1.5px);
+  }
+
+  :global(a:hover) .brand-mark-sello::after,
+  :global(a:focus-visible) .brand-mark-sello::after {
+    transform: scale(1.25);
+  }
+</style>

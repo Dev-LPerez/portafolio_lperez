@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import { projects } from "@/lib/projects";
+---
+
+<Layout
+  title="Proyectos"
+  description="Proyectos destacados de software y aplicaciones web desarrollados por Luis Guillermo Pérez Rubio. Plataformas en Laravel, Vue 3, React, Next.js, Firebase y PostgreSQL."
+  canonical="/proyectos"
+  keywords={[
+    "Proyectos Luis Guillermo Pérez Rubio",
+    "Portafolio de software",
+    "Sistema de Gestión de Refugios",
+    "NexLocal",
+    "GomiFire Menú Digital POS",
+    "Aplicaciones web Laravel PostgreSQL",
+    "Desarrollo frontend React Vue TypeScript",
+    "Casos de estudio desarrollo full-stack",
+  ]}
+>
+  {/* ── CABECERA ─────────────────────────────────── */}
+  <section class="section-header rule-bottom">
+    <div class="container">
+      <h1 class="display section-title">Proyectos</h1>
+      <p class="section-sub">
+        Una selección de plataformas web, arquitecturas backend y aplicaciones
+        construidas con enfoque en robustez, concurrencia y diseño limpio.
+      </p>
+    </div>
+  </section>
+
+
+  {/* ── LISTA ESTRUCTURADA DE PROYECTOS ──────────── */}
+  <section aria-label="Lista de proyectos seleccionados" class="projects-list-section">
+    <div class="container">
+      <ol class="projects-list">
+        {projects.map((project, i) => (
+          <li class="project-list-item">
+            <a
+              href={`/proyectos/${project.slug}`}
+              class="project-row"
+              aria-label={`Ver caso de estudio: ${project.title}`}
+              data-astro-prefetch
+            >
+              {/* Número de orden con tipografía Display */}
+              <span class="project-row-num display" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              {/* Vista previa miniatura para View Transition */}
+              <div
+                class="project-row-visual-box"
+                style={`view-transition-name: project-cover-${project.slug};`}
+              >
+                {project.screenshots && project.screenshots.length > 0 ? (
+                  <Image
+                    src={project.screenshots[0]}
+                    alt=""
+                    width={144}
+                    height={96}
+                    class="project-row-thumb-img"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="project-row-blueprint-badge">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      class="blueprint-icon-mini"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M5.25 14.25h13.5m-13.5 3h13.5m-9-9h9m-9 3h9m-11.25 6h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zm0-3h.008v.008h-.008v-.008zM3.75 3.75h16.5a1.5 1.5 0 011.5 1.5v13.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5z"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
+
+              {/* Bloque Principal de Contenido */}
+              <div class="project-row-main">
+                <div class="project-row-meta">
+                  <span class="project-row-category">{project.category}</span>
+                  <span class="project-row-sep" aria-hidden="true">/</span>
+                  <span class="project-row-year">{project.year}</span>
+                </div>
+
+                <h2
+                  class="project-row-title"
+                  style={`view-transition-name: project-title-${project.slug};`}
+                >
+                  {project.title}
+                </h2>
+
+                <p class="project-row-summary">{project.summary}</p>
+
+                {/* Stack de tecnologías destacadas */}
+                <div class="project-row-tags">
+                  {project.tags.slice(0, 5).map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                  {project.tags.length > 5 && (
+                    <span class="tag tag--more">+{project.tags.length - 5}</span>
+                  )}
+                </div>
+              </div>
+
+              {/* Indicador de navegación y flecha */}
+              <div class="project-row-action">
+                <span class="project-row-cta-label">Ver caso</span>
+                <span class="project-row-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
