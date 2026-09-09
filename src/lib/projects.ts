@@ -1,3 +1,6 @@
+import type { ImageMetadata } from "astro";
+import refugioCover from "@/assets/images/projects/refugios/refugio-1.png";
+
 export type Project = {
   slug: string;
   title: string;
@@ -12,6 +15,7 @@ export type Project = {
   githubUrl?: string; // Enlace al repositorio único de GitHub
   githubFrontendUrl?: string; // Enlace al repositorio Frontend
   githubBackendUrl?: string; // Enlace al repositorio Backend
+  coverImage?: ImageMetadata; // Imagen portada optimizada con astro:assets
   screenshots?: string[]; // Rutas de capturas de pantalla
   featured: boolean;
 };
@@ -32,6 +36,7 @@ export const projects: Project[] = [
     liveUrl: "https://sistema-refugio.lgperez.dev",
     githubFrontendUrl: "https://github.com/Dev-LPerez/SistemaRefugios_Frontend",
     githubBackendUrl: "https://github.com/Dev-LPerez/SistemaRefugios_Backend", // 👈 Ajusta la URL de tu repositorio backend si tiene otro nombre
+    coverImage: refugioCover,
     screenshots: [
       "/projects/refugios/refugio-1.png",
       "/projects/refugios/refugio-2.png",

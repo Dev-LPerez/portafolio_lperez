@@ -38,10 +38,14 @@ const { stats } = profile;
             <Image
               src={profile.avatar}
               alt={profile.name}
-              width={160}
-              height={160}
+              width={240}
+              height={240}
+              densities={[1, 2]}
+              quality={85}
               class="hero-photo-img"
               loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
           ) : (
             <span class="hero-photo-initials">{profile.initials}</span>
@@ -123,7 +127,21 @@ const { stats } = profile;
             style={{ textDecoration: "none" }}
             data-astro-prefetch
           >
-            {project.screenshots && project.screenshots.length > 0 ? (
+            {project.coverImage ? (
+              <div class="project-card-image-wrap">
+                <Image
+                  src={project.coverImage}
+                  alt={`Vista previa de ${project.title}`}
+                  width={640}
+                  height={360}
+                  quality={80}
+                  class="project-card-cover-img"
+                  style={`view-transition-name: project-cover-${project.slug};`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ) : project.screenshots && project.screenshots.length > 0 ? (
               <div class="project-card-image-wrap">
                 <Image
                   src={project.screenshots[0]}
@@ -133,6 +151,7 @@ const { stats } = profile;
                   class="project-card-cover-img"
                   style={`view-transition-name: project-cover-${project.slug};`}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             ) : (

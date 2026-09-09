@@ -53,14 +53,27 @@ import { projects } from "@/lib/projects";
                 class="project-row-visual-box"
                 style={`view-transition-name: project-cover-${project.slug};`}
               >
-                {project.screenshots && project.screenshots.length > 0 ? (
+                {project.coverImage ? (
+                  <Image
+                    src={project.coverImage}
+                    alt=""
+                    width={144}
+                    height={96}
+                    quality={80}
+                    class="project-row-thumb-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : project.screenshots && project.screenshots.length > 0 ? (
                   <Image
                     src={project.screenshots[0]}
                     alt=""
                     width={144}
                     height={96}
+                    quality={80}
                     class="project-row-thumb-img"
                     loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div class="project-row-blueprint-badge">

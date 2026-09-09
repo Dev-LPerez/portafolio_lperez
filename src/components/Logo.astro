@@ -53,9 +53,13 @@ const { className = "", variant = "wordmark", size = "md" } = Astro.props;
 
   .brand-wordmark-line2 {
     display: block;
-    color: var(--color-available, #3aa65a);
+    color: #1e783f; /* Accesibilidad WCAG AA: contraste 5.5:1 sobre fondo claro */
     font-size: 1.45rem;
     transition: transform 0.18s ease;
+  }
+
+  :global(.dark) .brand-wordmark-line2 {
+    color: var(--color-available, #3aa65a); /* Contraste >5.5:1 sobre fondo oscuro */
   }
 
   /* Tamaños Wordmark */

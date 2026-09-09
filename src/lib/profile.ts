@@ -1,8 +1,11 @@
+import type { ImageMetadata } from "astro";
+import avatarImg from "@/assets/images/luisperez.jpg";
+
 export const profile = {
   name: "Luis Guillermo Pérez Rubio",
   initials: "LP",
   logo: "LP",
-  avatar: "/luisperez.jpg", // Puedes cambiar la imagen en public/luisperez.jpg
+  avatar: avatarImg as ImageMetadata, // Optimizado con astro:assets
   role: "Ingeniero de Sistemas | Desarrollador Full-Stack",
   email: "luisperez0644@gmail.com",
   location: "Colombia",

@@ -279,16 +279,32 @@ const projectJsonLd = {
               style="text-decoration: none;"
               data-astro-prefetch
             >
-              {rel.screenshots && rel.screenshots.length > 0 ? (
+              {rel.coverImage ? (
+                <div class="project-card-image-wrap">
+                  <Image
+                    src={rel.coverImage}
+                    alt={`Vista previa de ${rel.title}`}
+                    width={640}
+                    height={360}
+                    quality={80}
+                    class="project-card-cover-img"
+                    style={`view-transition-name: project-cover-${rel.slug};`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : rel.screenshots && rel.screenshots.length > 0 ? (
                 <div class="project-card-image-wrap">
                   <Image
                     src={rel.screenshots[0]}
                     alt={`Vista previa de ${rel.title}`}
                     width={640}
                     height={360}
+                    quality={80}
                     class="project-card-cover-img"
                     style={`view-transition-name: project-cover-${rel.slug};`}
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               ) : (
