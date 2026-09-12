@@ -17,6 +17,21 @@ export default function ProjectCarousel({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
+  // Mapa reactivo de orientación por captura (vertical vs horizontal)
+  const [portraitMap, setPortraitMap] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    screenshots.forEach((src) => {
+      if (typeof window === "undefined") return;
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => {
+        const isPortrait = img.naturalHeight > img.naturalWidth * 1.12;
+        setPortraitMap((prev) => (prev[src] === isPortrait ? prev : { ...prev, [src]: isPortrait }));
+      };
+    });
+  }, [screenshots]);
+
   // Estados para Zoom y Arrastre (Pan)
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
@@ -358,51 +373,94 @@ export default function ProjectCarousel({
           </div>
 
           {/* Imagen interactiva principal con soporte de swipe móvil */}
-          <div
-            className="carousel-main-view"
-            onClick={openModal}
-            onTouchStart={handleInlineTouchStart}
-            onTouchEnd={handleInlineTouchEnd}
-            title="Toca para ampliar en pantalla completa"
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                openModal(e);
-              }
-            }}
-          >
-            <img
-              key={currentIndex}
-              src={screenshots[currentIndex]}
-              alt={`Captura ${currentIndex + 1} de ${title}`}
-              width={1200}
-              height={750}
-              className="carousel-main-image"
-              loading={currentIndex === 0 ? "eager" : "lazy"}
-              decoding="async"
-              style={{
-                width: "100%",
-                height: "auto",
-                ...(slug && currentIndex === 0 ? { viewTransitionName: `project-cover-${slug}` } : {}),
-              }}
-            />
+          {(() => {
+            const currentShot = screenshots[currentIndex] || "";
+            const isPortrait = Boolean(portraitMap[currentShot]);
 
-            {/* Swipe indicator badge para móvil */}
-            {total > 1 && (
-              <div className="carousel-mobile-swipe-badge" aria-hidden="true">
-                <span>Desliza ⟷</span>
+            return (
+              <div
+                className={`carousel-main-view ${isPortrait ? "carousel-main-view--portrait" : ""}`}
+                onClick={openModal}
+                onTouchStart={handleInlineTouchStart}
+                onTouchEnd={handleInlineTouchEnd}
+                title="Toca para ampliar en pantalla completa"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    openModal(e);
+                  }
+                }}
+              >
+                {/* Fondo ambiental desenfocado dinámico para capturas verticales */}
+                {isPortrait && (
+                  <div
+                    className="carousel-portrait-ambient"
+                    style={{ backgroundImage: `url("${currentShot}")` }}
+                    aria-hidden="true"
+                  />
+                )}
+
+                {/* Badge distintivo de captura móvil */}
+                {isPortrait && (
+                  <div className="carousel-portrait-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="6" y="2" width="12" height="20" rx="3" ry="3" />
+                      <circle cx="12" cy="18" r="1" />
+                    </svg>
+                    <span>Vista Móvil</span>
+                  </div>
+                )}
+
+                <img
+                  key={currentIndex}
+                  src={currentShot}
+                  alt={`Captura ${currentIndex + 1} de ${title}`}
+                  width={1200}
+                  height={750}
+                  className={`carousel-main-image ${isPortrait ? "carousel-main-image--portrait" : ""}`}
+                  loading={currentIndex === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  onLoad={(e) => {
+                    const img = e.currentTarget;
+                    const isP = img.naturalHeight > img.naturalWidth * 1.12;
+                    setPortraitMap((prev) => (prev[currentShot] === isP ? prev : { ...prev, [currentShot]: isP }));
+                  }}
+                  style={{
+                    ...(isPortrait
+                      ? {
+                          width: "auto",
+                          height: "92%",
+                          maxHeight: "92%",
+                          maxWidth: "92%",
+                          objectFit: "contain",
+                        }
+                      : {
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }),
+                    ...(slug && currentIndex === 0 ? { viewTransitionName: `project-cover-${slug}` } : {}),
+                  }}
+                />
+
+                {/* Swipe indicator badge para móvil */}
+                {total > 1 && (
+                  <div className="carousel-mobile-swipe-badge" aria-hidden="true">
+                    <span>Desliza ⟷</span>
+                  </div>
+                )}
+
+                {/* Hover overlay hint */}
+                <div className="carousel-zoom-hint" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                  </svg>
+                  <span>Ampliar</span>
+                </div>
               </div>
-            )}
-
-            {/* Hover overlay hint */}
-            <div className="carousel-zoom-hint" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
-              </svg>
-              <span>Ampliar</span>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* Controles de navegación */}
           {total > 1 && (
@@ -453,32 +511,45 @@ export default function ProjectCarousel({
         {/* Tira de Miniaturas */}
         {total > 1 && (
           <div className="carousel-thumbnails-strip" role="tablist">
-            {screenshots.map((shot, idx) => (
-              <button
-                key={idx}
-                type="button"
-                className={`carousel-thumb-item ${
-                  idx === currentIndex ? "is-active" : ""
-                }`}
-                onClick={() => {
-                  resetZoom();
-                  setCurrentIndex(idx);
-                }}
-                aria-label={`Ir a captura ${idx + 1}`}
-                role="tab"
-                aria-selected={idx === currentIndex}
-              >
-                <img
-                  src={shot}
-                  alt={`Miniatura ${idx + 1}`}
-                  width={160}
-                  height={100}
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </button>
-            ))}
+            {screenshots.map((shot, idx) => {
+              const isThumbPortrait = Boolean(portraitMap[shot]);
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  className={`carousel-thumb-item ${
+                    idx === currentIndex ? "is-active" : ""
+                  } ${isThumbPortrait ? "carousel-thumb-item--portrait" : ""}`}
+                  onClick={() => {
+                    resetZoom();
+                    setCurrentIndex(idx);
+                  }}
+                  aria-label={`Ir a captura ${idx + 1}`}
+                  role="tab"
+                  aria-selected={idx === currentIndex}
+                >
+                  <img
+                    src={shot}
+                    alt={`Miniatura ${idx + 1}`}
+                    width={160}
+                    height={100}
+                    loading="lazy"
+                    decoding="async"
+                    className={isThumbPortrait ? "carousel-thumb-img--portrait" : ""}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: isThumbPortrait ? "contain" : "cover",
+                    }}
+                  />
+                  {isThumbPortrait && (
+                    <span className="carousel-thumb-portrait-tag" title="Captura vertical">
+                      MÓVIL
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
@@ -557,100 +628,124 @@ export default function ProjectCarousel({
             </div>
 
             {/* Cuerpo del Modal con Visor, Zoom, Drag y Touch Gestures */}
-            <div
-              className={`project-modal-body ${zoom > 1 ? "is-zoomed" : ""} ${
-                isDragging ? "is-dragging" : ""
-              }`}
-              onWheel={handleWheel}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onTouchStart={handleModalTouchStart}
-              onTouchMove={handleModalTouchMove}
-              onTouchEnd={handleModalTouchEnd}
-            >
-              {total > 1 && (
-                <button
-                  type="button"
-                  className="modal-arrow-btn modal-arrow-btn--left"
-                  onClick={prevSlide}
-                  aria-label="Foto anterior"
-                >
-                  ‹
-                </button>
-              )}
+            {(() => {
+              const currentShot = screenshots[currentIndex] || "";
+              const isPortrait = Boolean(portraitMap[currentShot]);
 
-              <div
-                className="modal-image-wrapper"
-                onDoubleClick={handleToggleZoom}
-                title={
-                  zoom > 1
-                    ? "Arrastra para mover la imagen · Doble clic para restablecer"
-                    : "Doble clic o pellizca para hacer zoom"
-                }
-              >
-                <img
-                  key={currentIndex}
-                  src={screenshots[currentIndex]}
-                  alt={`Captura ${currentIndex + 1} de ${title}`}
-                  width={1600}
-                  height={1000}
-                  className="project-modal-image"
-                  style={{
-                    transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-                    cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
-                    transition: isDragging ? "none" : "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
-                    maxWidth: "100%",
-                    maxHeight: "80vh",
-                    width: "auto",
-                    height: "auto",
-                    objectFit: "contain",
-                  }}
-                  draggable={false}
-                />
-              </div>
-
-              {total > 1 && (
-                <button
-                  type="button"
-                  className="modal-arrow-btn modal-arrow-btn--right"
-                  onClick={nextSlide}
-                  aria-label="Siguiente foto"
+              return (
+                <div
+                  className={`project-modal-body ${zoom > 1 ? "is-zoomed" : ""} ${
+                    isDragging ? "is-dragging" : ""
+                  } ${isPortrait ? "project-modal-body--portrait" : ""}`}
+                  onWheel={handleWheel}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                  onTouchStart={handleModalTouchStart}
+                  onTouchMove={handleModalTouchMove}
+                  onTouchEnd={handleModalTouchEnd}
                 >
-                  ›
-                </button>
-              )}
-            </div>
+                  {/* Fondo ambiental sutil desenfocado en modal para verticales */}
+                  {isPortrait && (
+                    <div
+                      className="carousel-portrait-ambient modal-portrait-ambient"
+                      style={{ backgroundImage: `url("${currentShot}")` }}
+                      aria-hidden="true"
+                    />
+                  )}
+
+                  {total > 1 && (
+                    <button
+                      type="button"
+                      className="modal-arrow-btn modal-arrow-btn--left"
+                      onClick={prevSlide}
+                      aria-label="Foto anterior"
+                    >
+                      ‹
+                    </button>
+                  )}
+
+                  <div
+                    className={`modal-image-wrapper ${isPortrait ? "modal-image-wrapper--portrait" : ""}`}
+                    onDoubleClick={handleToggleZoom}
+                    title={
+                      zoom > 1
+                        ? "Arrastra para mover la imagen · Doble clic para restablecer"
+                        : "Doble clic o pellizca para hacer zoom"
+                    }
+                  >
+                    <img
+                      key={currentIndex}
+                      src={currentShot}
+                      alt={`Captura ${currentIndex + 1} de ${title}`}
+                      width={1600}
+                      height={1000}
+                      className={`project-modal-image ${isPortrait ? "project-modal-image--portrait" : ""}`}
+                      style={{
+                        transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                        cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
+                        transition: isDragging ? "none" : "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                        maxWidth: "100%",
+                        maxHeight: isPortrait ? "78vh" : "68vh",
+                        width: "auto",
+                        height: "auto",
+                        objectFit: "contain",
+                      }}
+                      draggable={false}
+                    />
+                  </div>
+
+                  {total > 1 && (
+                    <button
+                      type="button"
+                      className="modal-arrow-btn modal-arrow-btn--right"
+                      onClick={nextSlide}
+                      aria-label="Siguiente foto"
+                    >
+                      ›
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
 
             {/* Footer con miniaturas */}
             {total > 1 && (
               <div className="project-modal-footer">
                 <div className="modal-thumbs-row">
-                  {screenshots.map((shot, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      className={`modal-thumb-item ${
-                        idx === currentIndex ? "is-active" : ""
-                      }`}
-                      onClick={() => {
-                        resetZoom();
-                        setCurrentIndex(idx);
-                      }}
-                      aria-label={`Ver foto ${idx + 1}`}
-                    >
-                      <img
-                        src={shot}
-                        alt={`Miniatura modal ${idx + 1}`}
-                        width={120}
-                        height={80}
-                        loading="lazy"
-                        decoding="async"
-                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                      />
-                    </button>
-                  ))}
+                  {screenshots.map((shot, idx) => {
+                    const isThumbPortrait = Boolean(portraitMap[shot]);
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        className={`modal-thumb-item ${
+                          idx === currentIndex ? "is-active" : ""
+                        } ${isThumbPortrait ? "modal-thumb-item--portrait" : ""}`}
+                        onClick={() => {
+                          resetZoom();
+                          setCurrentIndex(idx);
+                        }}
+                        aria-label={`Ver foto ${idx + 1}`}
+                      >
+                        <img
+                          src={shot}
+                          alt={`Miniatura modal ${idx + 1}`}
+                          width={120}
+                          height={80}
+                          loading="lazy"
+                          decoding="async"
+                          className={isThumbPortrait ? "modal-thumb-img--portrait" : ""}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: isThumbPortrait ? "contain" : "cover",
+                          }}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}

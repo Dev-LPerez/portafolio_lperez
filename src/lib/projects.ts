@@ -1,5 +1,7 @@
 import type { ImageMetadata } from "astro";
 import refugioCover from "@/assets/images/projects/refugios/refugio-1.png";
+import nexlocalCover from "@/assets/images/projects/nexlocal/nexlocal-1.png";
+import gomifireCover from "@/assets/images/projects/gomifire/gomifire-1.png";
 
 export type Project = {
   slug: string;
@@ -54,16 +56,28 @@ export const projects: Project[] = [
     year: 2026,
     updatedAt: "2026-02-15",
     summary:
-      "Plataforma monolítica de turismo experiencial construida con Laravel 12 (PHP) y PostgreSQL, con sistema de reservas mediante Máquina de Estados Finitos.",
+      "Plataforma marketplace de experiencias turísticas locales construida con Laravel 12 (PHP) y PostgreSQL, con sistema de reservas mediante Máquina de Estados Finitos.",
     description:
-      "Arquitecté un monolito web escalable utilizando Laravel 12 y PHP, fundamentado en una rigurosa Programación Orientada a Objetos (POO) y respaldado por una base de datos relacional PostgreSQL. Diseñé un sistema basado en una Máquina de Estados Finitos para controlar con precisión el ciclo de vida de las reservas, gestionando concurrencia de cupos y cálculo automático de tarifas. Gestioné el control de versiones con Git colaborativo y apoyé el análisis y maquetación con uso estratégico de herramientas de IA para validación de lógica antes de producción.",
+      "Arquitecté un monolito web escalable utilizando Laravel 12 y PHP, fundamentado en una rigurosa Programación Orientada a Objetos (POO) y respaldado por una base de datos relacional PostgreSQL." +
+      " Diseñé un sistema basado en una Máquina de Estados Finitos para controlar con precisión el ciclo de vida de las reservas, gestionando concurrencia de cupos y cálculo automático de tarifas." +
+      " Gestioné el control de versiones con Git colaborativo y apoyé el análisis y maquetación con uso estratégico de herramientas de IA para validación de lógica antes de producción.",
     tags: ["Laravel 12", "PHP", "PostgreSQL", "Monolito", "POO", "Git"],
     links: [],
     liveUrl: "https://nexlocal.lgperez.dev",
     githubUrl: "https://github.com/Dev-LPerez/Nexlocal",
+    coverImage: nexlocalCover,
     screenshots: [
-      // "/projects/nexlocal-1.png",
-      // "/projects/nexlocal-2.png",
+      "/projects/nexlocal/nexlocal-1.png",
+      "/projects/nexlocal/nexlocal-2.png",
+      "/projects/nexlocal/nexlocal-3.png",
+      "/projects/nexlocal/nexlocal-4.png",
+      "/projects/nexlocal/nexlocal-5.png",
+      "/projects/nexlocal/nexlocal-6.png",
+      "/projects/nexlocal/nexlocal-7.png",
+      "/projects/nexlocal/nexlocal-8.png",
+      "/projects/nexlocal/nexlocal-9.png",
+      "/projects/nexlocal/nexlocal-10.png",
+      "/projects/nexlocal/nexlocal-11.png",
     ],
     featured: true,
   }, {
@@ -80,9 +94,17 @@ export const projects: Project[] = [
     links: [],
     liveUrl: "https://gomifire.lgperez.dev",
     githubUrl: "https://github.com/Dev-LPerez/gomifire-menuapp",
+    coverImage: gomifireCover,
     screenshots: [
-      // "/projects/gomifire-1.png",
-      // "/projects/gomifire-2.png",
+      "/projects/gomifire/gomifire-1.png",
+      "/projects/gomifire/gomifire-2.png",
+      "/projects/gomifire/gomifire-3.png",
+      "/projects/gomifire/gomifire-4.png",
+      "/projects/gomifire/gomifire-5.png",
+      "/projects/gomifire/gomifire-6.png",
+      "/projects/gomifire/gomifire-7.png",
+      "/projects/gomifire/gomifire-0.png",
+      "/projects/gomifire/gomifire-0-1.png",
     ],
     featured: true,
   },

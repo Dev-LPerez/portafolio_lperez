@@ -1,5 +1,5 @@
 import type { ImageMetadata } from "astro";
-import avatarImg from "@/assets/images/luisperez.jpg";
+import avatarImg from "@/assets/images/luisperezrubio.png";
 
 export const profile = {
   name: "Luis Guillermo Pérez Rubio",
