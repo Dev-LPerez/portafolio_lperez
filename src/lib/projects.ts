@@ -56,10 +56,10 @@ export const projects: Project[] = [
     year: 2026,
     updatedAt: "2026-02-15",
     summary:
-      "Plataforma marketplace de experiencias turísticas locales construida con Laravel 12 (PHP) y PostgreSQL, con sistema de reservas mediante Máquina de Estados Finitos.",
+      "Plataforma marketplace de experiencias turísticas locales construida con Laravel 12 (PHP) y PostgreSQL.",
     description:
       "Arquitecté un monolito web escalable utilizando Laravel 12 y PHP, fundamentado en una rigurosa Programación Orientada a Objetos (POO) y respaldado por una base de datos relacional PostgreSQL." +
-      " Diseñé un sistema basado en una Máquina de Estados Finitos para controlar con precisión el ciclo de vida de las reservas, gestionando concurrencia de cupos y cálculo automático de tarifas." +
+      " Diseñé un motor de reservas basado en una Máquina de Estados Finitos (FSM), optimizando la gestión de concurrencia de cupos, bloques de disponibilidad e integración con pasarela de pagos simulada. Desarrollé un módulo de mensajería interna entre usuarios y un sistema e-commerce/marketplace integrado, orquestando notificaciones asíncronas vía base de datos y tareas programadas." +
       " Gestioné el control de versiones con Git colaborativo y apoyé el análisis y maquetación con uso estratégico de herramientas de IA para validación de lógica antes de producción.",
     tags: ["Laravel 12", "PHP", "PostgreSQL", "Monolito", "POO", "Git"],
     links: [],
