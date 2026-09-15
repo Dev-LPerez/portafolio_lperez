@@ -35,6 +35,7 @@ import {
   SiVercel,
   SiCssmodules,
   SiAstro,
+  SiSupabase,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
 import { TbSql, TbChartInfographic } from "react-icons/tb";
@@ -87,6 +88,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   MongoDB: SiMongodb,
   Redis: SiRedis,
   Prisma: SiPrisma,
+  Supabase: SiSupabase,
+  supabase: SiSupabase,
 
   // DevOps & Herramientas
   Git: SiGit,

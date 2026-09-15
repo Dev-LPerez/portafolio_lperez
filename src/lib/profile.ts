@@ -25,7 +25,7 @@ export const profile = {
     Lenguajes: ["TypeScript", "JavaScript", "Java", "PHP", "SQL", "HTML5", "CSS3"],
     Frontend: ["React", "Next.js", "Laravel", "Tailwind CSS", "Vue.js", "Astro"],
     Backend: ["Node.js", "NestJS", "Laravel", "FastAPI", "Springboot"],
-    "Bases De Datos": ["PostgreSQL", "MySQL", "Firebase", "MongoDB"],
+    "Bases De Datos": ["PostgreSQL", "MySQL", "Firebase", "MongoDB", "Supabase"],
     DevOps: ["Git", "Docker", "Kubernetes"],
   },
   certificates: [
