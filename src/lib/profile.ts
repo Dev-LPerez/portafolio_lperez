@@ -38,6 +38,14 @@ export const profile = {
       image: "/certificates/nestjs+microservicios.jpg", // Coloca la ruta ej: "/certificates/nestjs-microservicios.jpg"
     },
     {
+      date: "Jul 2026",
+      title: "Diplomado en Desarrollo de Aplicaciones Web utilizando Herramientas en la Nube",
+      issuer: "Universidad de Córdoba",
+      detail: "Intensidad: 120 horas",
+      link: "http://campusvirtual.unicordoba.edu.co/inscripciones/certificados", // 👈 Agrega el enlace directo de verificación si tienes uno más específico
+      image: "/certificates/diplomado.png", // 👈 Ajusta la ruta cuando tengas la imagen del certificado
+    },
+    {
       date: "Mar 2026",
       title: "Curso de Backend con NestJS",
       issuer: "Platzi",
