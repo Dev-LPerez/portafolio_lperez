@@ -11,9 +11,9 @@ export const profile = {
   location: "Colombia",
   status: "available" as "available" | "busy",
   bio: [
-    "Ingeniero de Sistemas y Desarrollador Full-Stack con fuerte inclinación hacia el desarrollo Backend, la arquitectura modular y los lenguajes fuertemente tipados como TypeScript y Java.",
-    "Apasionado por diseñar software mantenible y escalable utilizando marcos modernos como NestJS y Spring Boot, así como monolitos bien estructurados con PHP (Laravel). Me especializo en el modelado de bases de datos relacionales, siendo PostgreSQL mi motor favorito, sin dejar de lado la gestión eficiente con MySQL.",
-    "Aunque mi núcleo fuerte está en el servidor, construyo experiencias Frontend completas y fluidas utilizando Vue.js, React, Next.js y Tailwind CSS, ofreciendo así una visión integral en todo el ciclo de vida del desarrollo.",
+    "Ingeniero de Sistemas y Desarrollador Full-Stack con foco en el desarrollo Backend, el diseño de arquitecturas de software y lenguajes fuertemente tipados como TypeScript y Java.",
+    "Diseño sistemas mantenibles y escalables con frameworks como NestJS y Spring Boot, y aplicaciones robustas sobre Laravel. Me especializo en el modelado de bases de datos relacionales, con PostgreSQL como motor de referencia, además de experiencia sólida en MySQL.",
+    "Aunque mi fuerte está en el servidor, construyo experiencias Frontend completas con Vue.js, React, Next.js y Tailwind CSS, lo que me da una visión integral de todo el ciclo de vida del desarrollo.",
   ],
   stats: {
     years: 1,

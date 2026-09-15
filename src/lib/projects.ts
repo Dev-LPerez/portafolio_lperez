@@ -2,6 +2,7 @@ import type { ImageMetadata } from "astro";
 import refugioCover from "@/assets/images/projects/refugios/refugio-1.png";
 import nexlocalCover from "@/assets/images/projects/nexlocal/nexlocal-1.png";
 import gomifireCover from "@/assets/images/projects/gomifire/gomifire-1.png";
+import fokusCover from "@/assets/images/projects/fokus/fokus-0.png"; // 👈 Ajusta la ruta si tu imagen de portada tiene otro nombre
 
 export type Project = {
   slug: string;
@@ -23,6 +24,35 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "fokus",
+    title: "Fokus — Copiloto de Productividad Ejecutiva con IA",
+    category: "AI Agent / SaaS",
+    year: 2026,
+    updatedAt: "2026-09-01",
+    summary:
+      "Copiloto de productividad ejecutiva con function calling nativo (Google Gemini API), backend en FastAPI y frontend en Next.js.",
+    description:
+      "Diseñé y desarrollé un copiloto de productividad ejecutiva con function calling nativo (Google Gemini API), orquestando 9 herramientas especializadas (auditoría de agenda, detección de bloques de Deep Work, agendamiento automático, recordatorios, clima, búsqueda web) mediante un patrón de registro extensible." +
+      " Implementé autenticación con Supabase Auth, verificando JWT de forma local vía JWKS (firma asimétrica ES256) sin depender de un tercero en cada petición, e integré OAuth 2.0 con Google Calendar cifrando los tokens en reposo (Fernet/AES) para automatizar la creación de eventos y la detección de espacios libres en la agenda." +
+      " Desarrollé un endpoint de briefing diario que agrega en tiempo real clima, eventos de calendario, recordatorios pendientes y el mejor bloque disponible para trabajo profundo, generando un resumen ejecutivo accionable para el usuario." +
+      " Implementé streaming de respuestas en tiempo real (Server-Sent Events) entre el backend en FastAPI y el frontend en Next.js, incluyendo el consumo manual del stream para soportar autenticación por header, junto con flujos de onboarding, gestión de conversaciones y proyectos.",
+    tags: ["FastAPI", "Next.js", "Google Gemini API", "Supabase", "OAuth 2.0", "Google Calendar API", "SSE", "TypeScript"],
+    links: [],
+    liveUrl: "https://fokus.lgperez.dev/", // 👈 Agrega el enlace en vivo cuando esté disponible
+    githubFrontendUrl: "https://github.com/Dev-LPerez/Fokus-Frontend", // 👈 Agrega el repositorio frontend
+    githubBackendUrl: "https://github.com/Dev-LPerez/Fokus-Backend", // 👈 Agrega el repositorio backend
+    coverImage: fokusCover,
+    screenshots: [
+      "/projects/fokus/fokus-0.png", // 👈 Ajusta las rutas según tus capturas reales
+      "/projects/fokus/fokus-1.png",
+      "/projects/fokus/fokus-2.png",
+      "/projects/fokus/fokus-3.png",
+      "/projects/fokus/fokus-4.png",
+
+    ],
+    featured: true,
+  },
   {
     slug: "sistema-gestion-refugios",
     title: "Sistema de Gestión de Refugios",
