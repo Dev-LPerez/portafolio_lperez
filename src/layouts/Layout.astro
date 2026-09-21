@@ -116,5 +116,11 @@ const personJsonLd = {
       <slot />
     </main>
     <Footer />
-</body>
+
+    {/* Vercel Web Analytics */}
+    <script>
+      import { inject } from "@vercel/analytics";
+      inject();
+    </script>
+  </body>
 </html>

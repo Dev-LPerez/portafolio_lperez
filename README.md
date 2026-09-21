@@ -136,6 +136,7 @@ Cada proyecto en el portafolio no se expone como un simple "sitio web", sino com
 | **Tailwind CSS 4** | Motor de Estilos | Integración ultrarrápida vía `@tailwindcss/vite`, variables OKLCH nativas y cero CSS redundante. |
 | **React 19** | Componentes Interactivos | Islas aisladas para experiencias táctiles y modales con ciclo de vida moderno. |
 | **Sharp** | Procesamiento de Activos | Compresión y optimización de imágenes en tiempo de compilación. |
+| **Vercel Web Analytics** | Telemetría & Tráfico | Métricas en tiempo real con script ligero (~1.1 kB) integrado con View Transitions. |
 | **Vercel** | Infraestructura & CDN | Despliegue continuo en la red Edge global con baja latencia y compresión Brotli. |
 
 ---
