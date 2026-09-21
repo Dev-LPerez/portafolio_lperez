@@ -36,6 +36,7 @@ import {
   SiCssmodules,
   SiAstro,
   SiSupabase,
+  SiRender,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
 import { TbSql, TbChartInfographic } from "react-icons/tb";
@@ -99,6 +100,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "GitHub Actions": SiGithubactions,
   Linux: SiLinux,
   Vercel: SiVercel,
+  Render: SiRender,
+  render: SiRender,
   Stripe: SiStripe,
   JWT: SiJsonwebtokens,
   Scrum: RiProgress8Line,

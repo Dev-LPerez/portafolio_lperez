@@ -12,21 +12,21 @@ export const profile = {
   status: "available" as "available" | "busy",
   bio: [
     "Ingeniero de Sistemas y Desarrollador Full-Stack con foco en el desarrollo Backend, el diseño de arquitecturas de software y lenguajes fuertemente tipados como TypeScript y Java.",
-    "Diseño sistemas mantenibles y escalables con frameworks como NestJS y Spring Boot, y aplicaciones robustas sobre Laravel. Me especializo en el modelado de bases de datos relacionales, con PostgreSQL como motor de referencia, además de experiencia sólida en MySQL.",
-    "Aunque mi fuerte está en el servidor, construyo experiencias Frontend completas con Vue.js, React, Next.js y Tailwind CSS, lo que me da una visión integral de todo el ciclo de vida del desarrollo.",
+    "Diseño sistemas mantenibles y escalables con frameworks como NestJS, Spring Boot y FastAPI, y aplicaciones robustas sobre Laravel. Tengo experiencia sólida en bases de datos relacionales, especialmente PostgreSQL, además de conocimientos en MySQL, e implemento mecanismos de autenticación segura para proteger la información de los usuarios.",
+    "Aunque mi fuerte está en el servidor, construyo experiencias Frontend completas con Next.js, React y Tailwind CSS. También integro modelos de Inteligencia Artificial en productos reales, lo que me da una visión integral de todo el ciclo de vida del desarrollo.",
   ],
   stats: {
     years: 1,
-    projects: 3,
+    projects: 4,
     technologies: 15,
-    certifications: 4,
+    certifications: 5,
   },
   skills: {
-    Lenguajes: ["TypeScript", "JavaScript", "Java", "PHP", "SQL", "HTML5", "CSS3"],
-    Frontend: ["React", "Next.js", "Laravel", "Tailwind CSS", "Vue.js", "Astro"],
-    Backend: ["Node.js", "NestJS", "Laravel", "FastAPI", "Springboot"],
-    "Bases De Datos": ["PostgreSQL", "MySQL", "Firebase", "MongoDB", "Supabase"],
-    DevOps: ["Git", "Docker", "Kubernetes"],
+    Lenguajes: ["TypeScript", "JavaScript", "Java", "PHP", "Python", "SQL", "HTML5", "CSS3"],
+    Frontend: ["Next.js", "React", "Tailwind CSS", "Astro"],
+    Backend: ["NestJS", "Node.js", "Laravel", "FastAPI", "Springboot"],
+    "Bases De Datos": ["PostgreSQL", "MySQL", "Firebase", "MongoDB"],
+    DevOps: ["Git", "Docker", "Kubernetes", "Supabase", "Vercel", "Render"],
   },
   certificates: [
     {
@@ -35,15 +35,15 @@ export const profile = {
       issuer: "Udemy",
       detail: "Instructores: Fernando Herrera, {d/t} - DevTalles",
       link: "https://ude.my/UC-d610ee3f-e643-4741-8992-7de842abe5d6",
-      image: "/certificates/nestjs+microservicios.jpg", // Coloca la ruta ej: "/certificates/nestjs-microservicios.jpg"
+      image: "/certificates/nestjs+microservicios.jpg",
     },
     {
       date: "Jul 2026",
       title: "Diplomado en Desarrollo de Aplicaciones Web utilizando Herramientas en la Nube",
       issuer: "Universidad de Córdoba",
       detail: "Intensidad: 120 horas",
-      link: "http://campusvirtual.unicordoba.edu.co/inscripciones/certificados", // 👈 Agrega el enlace directo de verificación si tienes uno más específico
-      image: "/certificates/diplomado.png", // 👈 Ajusta la ruta cuando tengas la imagen del certificado
+      link: "http://campusvirtual.unicordoba.edu.co/inscripciones/certificados",
+      image: "/certificates/diplomado.png",
     },
     {
       date: "Mar 2026",
