@@ -1,6 +1,7 @@
 ---
 import { profile } from "@/lib/profile";
 import Logo from "@/components/Logo.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 
 const pathname = Astro.url.pathname;
 
@@ -47,6 +48,9 @@ function isActive(href: string) {
 
     {/* Controles de la derecha */}
     <div class="header-actions">
+      {/* Botón selector de tema oscuro/claro */}
+      <ThemeToggle id="theme-toggle-desktop" />
+
       {/* CTA Contacto visible en desktop y tablets */}
       <a
         href={`mailto:${profile.email}`}
@@ -131,6 +135,7 @@ function isActive(href: string) {
           </a>
 
           <div class="mobile-drawer-socials">
+            <ThemeToggle id="theme-toggle-mobile" variant="drawer" />
             <a
               href={profile.social.github}
               target="_blank"
@@ -229,7 +234,54 @@ function isActive(href: string) {
     });
   }
 
+  function setupThemeToggle() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
+    if (!buttons.length) return;
+
+    function syncButtons() {
+      const isDark = document.documentElement.classList.contains("dark");
+      buttons.forEach((btn) => {
+        const targetText = isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
+        btn.setAttribute("aria-label", targetText);
+        btn.setAttribute("title", targetText);
+        btn.setAttribute("aria-pressed", isDark ? "true" : "false");
+      });
+    }
+
+    syncButtons();
+
+    buttons.forEach((btn) => {
+      btn.onclick = () => {
+        document.documentElement.classList.add("theme-transition");
+        const willBeDark = !document.documentElement.classList.contains("dark");
+
+        if (willBeDark) {
+          document.documentElement.classList.add("dark");
+          try {
+            localStorage.setItem("theme", "dark");
+          } catch (e) {}
+        } else {
+          document.documentElement.classList.remove("dark");
+          try {
+            localStorage.setItem("theme", "light");
+          } catch (e) {}
+        }
+
+        syncButtons();
+
+        setTimeout(() => {
+          document.documentElement.classList.remove("theme-transition");
+        }, 260);
+      };
+    });
+  }
+
   // Ejecutar tanto en la carga inicial como en cada navegación de View Transitions
-  setupHeader();
-  document.addEventListener("astro:page-load", setupHeader);
+  function initHeaderAndTheme() {
+    setupHeader();
+    setupThemeToggle();
+  }
+
+  initHeaderAndTheme();
+  document.addEventListener("astro:page-load", initHeaderAndTheme);
 </script>

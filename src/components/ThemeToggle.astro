@@ -1,0 +1,200 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+  variant?: "header" | "drawer";
+}
+
+const { id = "theme-toggle", className = "", variant = "header" } = Astro.props;
+---
+
+<button
+  type="button"
+  id={id}
+  class={`theme-toggle theme-toggle--${variant} ${className}`}
+  aria-label="Cambiar a modo oscuro"
+  title="Cambiar a modo oscuro"
+  data-theme-toggle
+>
+  <span class="theme-toggle-icon-wrap" aria-hidden="true">
+    {/* Sol geométrico (visible en modo oscuro) */}
+    <svg
+      class="theme-icon theme-icon--sun"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="10" cy="10" r="3.25"></circle>
+      <line x1="10" y1="2" x2="10" y2="4"></line>
+      <line x1="10" y1="16" x2="10" y2="18"></line>
+      <line x1="2" y1="10" x2="4" y2="10"></line>
+      <line x1="16" y1="10" x2="18" y2="10"></line>
+      <line x1="4.34" y1="4.34" x2="5.75" y2="5.75"></line>
+      <line x1="14.25" y1="14.25" x2="15.66" y2="15.66"></line>
+      <line x1="4.34" y1="15.66" x2="5.75" y2="14.25"></line>
+      <line x1="14.25" y1="5.75" x2="15.66" y2="4.34"></line>
+    </svg>
+
+    {/* Luna arquitectónica (visible en modo claro) */}
+    <svg
+      class="theme-icon theme-icon--moon"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M14.7 11.4A6.2 6.2 0 0 1 8.6 3.3a6.25 6.25 0 1 0 8.1 8.1c-.65.01-1.34 0-2-.0z"></path>
+    </svg>
+  </span>
+
+  {variant === "drawer" && (
+    <span class="theme-toggle-label">
+      <span class="label-light">Modo Claro</span>
+      <span class="label-dark">Modo Oscuro</span>
+    </span>
+  )}
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    border-radius: var(--radius-sm, 4px);
+    transition: background-color 0.18s ease,
+                border-color 0.18s ease,
+                color 0.18s ease,
+                transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  /* ─────────────────────────────────────────────
+     VARIANTE HEADER (Discreta, secundaria, 100% alineada con CTA)
+  ───────────────────────────────────────────── */
+  .theme-toggle--header {
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 44px;
+    min-height: 44px;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted-foreground);
+    padding: 0;
+  }
+
+  /* En desktop: altura exacta de 38px para emparejar pixel-perfect con .btn--sm */
+  @media (min-width: 768px) {
+    .theme-toggle--header {
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      min-height: 38px;
+    }
+  }
+
+  .theme-toggle--header:hover {
+    background-color: var(--color-paper);
+    border-color: var(--color-ink);
+    color: var(--color-foreground);
+  }
+
+  /* ─────────────────────────────────────────────
+     VARIANTE DRAWER (Compañera exacta de .mobile-social-btn)
+  ───────────────────────────────────────────── */
+  .theme-toggle--drawer {
+    gap: 0.5rem;
+    padding: 0.6rem 1.15rem;
+    min-height: 44px;
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-border);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+    font-family: var(--font-body, "Barlow", sans-serif);
+  }
+
+  .theme-toggle--drawer:hover,
+  .theme-toggle--drawer:active {
+    background-color: var(--color-ink);
+    color: var(--color-background);
+    border-color: var(--color-ink);
+  }
+
+  /* ─────────────────────────────────────────────
+     ICONOS Y MICROINTERACCIONES
+  ───────────────────────────────────────────── */
+  .theme-toggle-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  .theme-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  }
+
+  .theme-toggle:hover .theme-icon {
+    transform: rotate(20deg);
+  }
+
+  /* Alternancia por CSS */
+  .theme-icon--sun {
+    display: none;
+  }
+  .theme-icon--moon {
+    display: block;
+  }
+
+  :global(.dark) .theme-icon--sun {
+    display: block;
+  }
+  :global(.dark) .theme-icon--moon {
+    display: none;
+  }
+
+  /* ─────────────────────────────────────────────
+     ETIQUETAS DEL DRAWER
+  ───────────────────────────────────────────── */
+  .theme-toggle-label {
+    display: inline-flex;
+    line-height: 1;
+  }
+
+  .label-light {
+    display: none;
+  }
+  .label-dark {
+    display: inline;
+  }
+
+  :global(.dark) .label-light {
+    display: inline;
+  }
+  :global(.dark) .label-dark {
+    display: none;
+  }
+</style>

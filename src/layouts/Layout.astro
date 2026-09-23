@@ -76,6 +76,39 @@ const personJsonLd = {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
 
+    {/* Anti-FOUC & Theme Manager: Síncrono y bloqueante antes del primer render */}
+    <script is:inline>
+      (function() {
+        function applyCurrentTheme() {
+          try {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+            if (isDark) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          } catch (e) {}
+        }
+
+        applyCurrentTheme();
+        document.addEventListener('astro:after-swap', applyCurrentTheme);
+
+        if (typeof window !== 'undefined') {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+              if (e.matches) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            }
+          });
+        }
+      })();
+    </script>
+
     {/* SEO Primario */}
     <title>{fullTitle}</title>
     <meta name="description" content={description} />

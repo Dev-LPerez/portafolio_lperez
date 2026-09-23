@@ -55,11 +55,13 @@
    DESIGN TOKENS — OKLCH MONOCHROME
 ───────────────────────────────────────────── */
 :root {
+  color-scheme: light;
   /* backgrounds */
   --color-background: oklch(100% 0 0);
   /* #fff */
   --color-paper: oklch(97% 0 0);
   /* ~#f7f7f7 */
+  --color-surface: oklch(97% 0 0);
   --color-ink: oklch(9% 0 0);
   /* ~#161616 */
   --color-ink-soft: oklch(30% 0 0);
@@ -93,14 +95,26 @@
 
 /* ── Dark mode ── */
 .dark {
+  color-scheme: dark;
   --color-background: oklch(9% 0 0);
   --color-paper: oklch(13% 0 0);
+  --color-surface: oklch(14% 0 0);
   --color-ink: oklch(97% 0 0);
   --color-ink-soft: oklch(80% 0 0);
   --color-border: oklch(22% 0 0);
   --color-rule: oklch(25% 0 0);
   --color-foreground: oklch(97% 0 0);
-  --color-muted-foreground: oklch(62% 0 0);
+  --color-muted-foreground: oklch(65% 0 0);
+  --color-available: oklch(72% 0.19 145);
+}
+
+/* Smooth theme transition when manually toggled */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease !important;
+  transition-delay: 0s !important;
 }
 
 /* ─────────────────────────────────────────────
